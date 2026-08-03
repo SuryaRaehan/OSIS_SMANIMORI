@@ -206,13 +206,12 @@ body {
   font-size: 16px;
 }
 .logo-dot {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: linear-gradient(180deg, var(--orange-1), var(--orange-4));
-  box-shadow: 0 4px 8px -2px rgba(220, 60, 30, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4),
-    inset 0 -2px 3px rgba(120, 20, 0, 0.3);
+  width: 26px;
+  height: 29px;
+  flex-shrink: 0;
+  background: url('asset/smawuk.png') center / cover no-repeat;
+  border-radius: 7px;
+  box-shadow: 0 4px 8px -2px rgba(220, 60, 30, 0.3);
 }
 
 /* Logo text wrapper + pill */
@@ -1237,163 +1236,6 @@ body {
     grid-template-columns: repeat(3, 1fr);
   }
 }
-@media (max-width: 750px) {
-  .nav {
-    padding: 14px 16px;
-  }
-  .nav-links {
-    position: absolute;
-    top: calc(100% + 10px);
-    right: 16px;
-    flex-direction: column;
-    gap: 4px;
-    padding: 12px;
-    background: linear-gradient(
-      165deg,
-      rgba(217, 53, 31, 0.92) 0%,
-      rgba(232, 90, 43, 0.94) 40%,
-      rgba(55, 20, 10, 0.97) 100%
-    );
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 18px;
-    box-shadow: 0 20px 40px -12px rgba(20, 8, 0, 0.35);
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(-10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    z-index: 60;
-  }
-  .nav-links.open {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateY(0);
-  }
-  .nav-pill {
-    display: none;
-  }
-  .nav-links a {
-    display: block;
-    padding: 12px 16px;
-    border-radius: 12px;
-    color: #faf5ea;
-  }
-  .nav-links a:hover {
-    background: rgba(255, 255, 255, 0.14);
-    color: #fff;
-  }
-  .nav-cta {
-    padding: 10px 16px;
-    font-size: 12px;
-  }
-  .nav-toggle {
-    display: inline-flex;
-  }
-  .hero {
-    padding: 100px 16px 40px;
-    min-height: 100svh;
-  }
-  .small-team {
-    font-size: 10vw;
-  }
-  .big-results {
-    font-size: clamp(56px, 17vw, 120px);
-    letter-spacing: -0.05em;
-  }
-  .subline {
-    margin-top: 40px;
-  }
-  .team-section {
-    padding: 60px 20px 40px;
-  }
-  .org-leaders,
-  .org-core {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-  }
-  .org-core {
-    margin-top: 14px;
-  }
-  .sie-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    margin-top: 40px;
-  }
-  .motto {
-    padding: 70px 20px 0;
-  }
-  .motto .team-head {
-    margin-bottom: 40px;
-  }
-  .stats-table-wrap {
-    padding: 36px 22px;
-    border-radius: 24px;
-  }
-  .daftar {
-    padding: 120px 16px 60px;
-  }
-  .daftar-head {
-    margin-bottom: 32px;
-  }
-  .daftar-card {
-    padding: 10px;
-    border-radius: 20px;
-  }
-  .daftar-card iframe {
-    height: 1350px;
-    border-radius: 14px;
-  }
-  .gallery {
-    height: 130vh;
-  }
-  .gallery-wrap {
-    gap: 14px;
-    padding: 28px 0;
-  }
-  .g-row {
-    gap: 12px;
-  }
-  .g-img {
-    width: 190px;
-    height: 120px;
-    border-radius: 10px;
-  }
-  .expand-gallery {
-    padding: 70px 20px 0;
-  }
-  .expand-head {
-    margin-bottom: 32px;
-  }
-  .eg-grid {
-    gap: 12px;
-  }
-  .eg-strip {
-    gap: 8px;
-    height: min(18vh, 170px);
-  }
-  .eg-btn {
-    border-radius: 50%;
-  }
-  .eg-close {
-    top: 14px;
-    right: 14px;
-    width: 38px;
-    height: 38px;
-  }
-  .eg-prev,
-  .eg-next {
-    width: 42px;
-    height: 42px;
-  }
-}
-
-/* Very small screens */
-@media (max-width: 380px) {
-  .subline {
-    margin-top: 34px;
-  }
-}
 
 /* ============ HALAMAN PENDAFTARAN ============ */
 .daftar {
@@ -1743,13 +1585,7 @@ body {
   --color-5: rgba(0, 0, 0, 0.42);
 }
 
-@media (max-width: 480px) {
-  .video-popup-card {
-    height: min(86vh, 560px);
-  }
-}
 
-/* ============ HALAMAN FOLDER PPT (folder.html) ============ */
 .folder-page {
   background: var(--bg);
   color: var(--ink);
@@ -1961,22 +1797,4 @@ body {
   background: #fff;
 }
 
-@media (max-width: 600px) {
-  .ppt-modal {
-    padding: 12px;
-  }
-  .ppt-modal-card {
-    height: 90vh;
-  }
-}
 
-@media (max-width: 600px) {
-  .folder-main {
-    padding: 84px 16px 60px;
-  }
-  .folder-head {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-}

@@ -1,0 +1,331 @@
+/* ============================================================
+   MOBILE.CSS — tampilan layar < 768px
+   ------------------------------------------------------------
+   File ini hanya aktif di layar <= 767.98px (lihat <link
+   media="..."> di setiap HTML). Komposisi mengikuti desktop:
+   urutan section, gaya kartu, grid, dan nuansa tetap sama —
+   hanya ukuran/spasi yang disesuaikan agar pas di layar sempit.
+   ============================================================ */
+
+/* ============ NAV: HAMBURGER DROPDOWN ============ */
+@media (max-width: 767.98px) {
+  .nav {
+    padding: 10px 16px;
+  }
+  .logo {
+    font-size: 14px;
+    gap: 8px;
+  }
+  .logo-dot {
+    width: 22px;
+    height: 24px;
+  }
+  .nav-cta {
+    padding: 8px 13px;
+    font-size: 11.5px;
+    border-radius: 999px;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 16px;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px;
+    background: linear-gradient(
+      165deg,
+      rgba(217, 53, 31, 0.92) 0%,
+      rgba(232, 90, 43, 0.94) 40%,
+      rgba(55, 20, 10, 0.97) 100%
+    );
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 18px;
+    box-shadow: 0 20px 40px -12px rgba(20, 8, 0, 0.35);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 60;
+  }
+  .nav-links.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+  .nav-pill {
+    display: none;
+  }
+  .nav-links a {
+    display: block;
+    padding: 12px 16px;
+    border-radius: 12px;
+    color: #faf5ea;
+  }
+  .nav-links a:hover {
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+  }
+  .nav-toggle {
+    display: inline-flex;
+  }
+}
+
+/* ============ HERO ============ */
+@media (max-width: 767.98px) {
+  .hero {
+    padding: 100px 16px 40px;
+    min-height: 100svh;
+  }
+  .small-team {
+    font-size: 10vw;
+  }
+  .big-results-wrap {
+    overflow-x: clip;
+    margin-top: 0;
+  }
+  .big-results {
+    font-size: clamp(56px, 17vw, 120px);
+    letter-spacing: -0.05em;
+  }
+  .fan-carousel {
+    margin-top: 0;
+  }
+  .fan-controls {
+    margin-top: 28px;
+  }
+  .subline {
+    margin-top: 64px;
+  }
+}
+
+/* ============ MOTTO + TABEL ============ */
+@media (max-width: 767.98px) {
+  .motto {
+    padding: 70px 20px 0;
+  }
+  .motto .team-head {
+    margin-bottom: 40px;
+  }
+  .team-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+  }
+  .team-head p {
+    max-width: 100%;
+  }
+  .stats-table-wrap {
+    padding: 36px 22px;
+    border-radius: 24px;
+  }
+}
+
+/* ============ STRUKTUR ORGANISASI ============ */
+@media (max-width: 767.98px) {
+  .team-section {
+    padding: 60px 20px 40px;
+  }
+  .org-leaders,
+  .org-core {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .org-core {
+    margin-top: 14px;
+  }
+  .org-card {
+    border-radius: 16px;
+  }
+  .org-meta {
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    padding: 10px 12px;
+    border-radius: 12px;
+  }
+  .org-nm {
+    font-size: 13px;
+  }
+  .org-rl {
+    font-size: 10px;
+  }
+}
+
+/* ============ SIE 1-10 ============ */
+@media (max-width: 767.98px) {
+  .sie-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 40px;
+  }
+  .sie-btn {
+    padding: 14px 15px;
+    font-size: 14px;
+  }
+  .sie-folder {
+    font-size: 12px;
+    margin: 0 12px 12px;
+    padding: 9px 12px;
+    width: calc(100% - 24px);
+    border-radius: 9px;
+  }
+  .sie-body-inner {
+    padding: 4px 12px 14px;
+    gap: 8px;
+  }
+  .sie-member {
+    padding: 8px 9px;
+    border-radius: 10px;
+  }
+  .sie-member img {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* ============ GALERI (SCROLL BERSILANGAN) ============ */
+@media (max-width: 767.98px) {
+  .gallery {
+    height: auto;
+    padding: 120px 0 16px;
+  }
+  .gallery-wrap {
+    position: relative;
+    top: auto;
+    height: auto;
+    gap: 12px;
+    padding: 0;
+  }
+  .g-row {
+    gap: 12px;
+  }
+  .g-img {
+    width: calc((100vw - 24px) / 3);
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+  }
+}
+
+/* ============ GALERI EXPANDABLE ============ */
+@media (max-width: 767.98px) {
+  .expand-gallery {
+    padding: 70px 20px 0;
+  }
+  .expand-head {
+    margin-bottom: 32px;
+  }
+  .eg-grid {
+    gap: 12px;
+  }
+  .eg-strip {
+    gap: 8px;
+    height: min(18vh, 170px);
+  }
+  .eg-caption {
+    font-size: 11px;
+    left: 12px;
+    bottom: 10px;
+  }
+  .eg-btn {
+    border-radius: 50%;
+  }
+  .eg-close {
+    top: 14px;
+    right: 14px;
+    width: 38px;
+    height: 38px;
+  }
+  .eg-prev,
+  .eg-next {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+/* ============ HALAMAN PENDAFTARAN ============ */
+@media (max-width: 767.98px) {
+  .daftar {
+    padding: 120px 16px 60px;
+  }
+  .daftar-head {
+    margin-bottom: 32px;
+  }
+  .daftar-card {
+    padding: 10px;
+    border-radius: 20px;
+  }
+  .daftar-card iframe {
+    height: 1350px;
+    border-radius: 14px;
+  }
+}
+
+/* ============ FOOTER ============ */
+@media (max-width: 767.98px) {
+  .footer {
+    padding: 28px 20px 48px;
+  }
+  .footer-inner {
+    padding-top: 28px;
+    gap: 14px;
+  }
+  .footer-sosmed {
+    gap: 18px;
+  }
+}
+
+/* ============ LAYAR 601-767PX: MENDEKATI DESKTOP ============ */
+@media (min-width: 601px) and (max-width: 767.98px) {
+  .team-head {
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 28px;
+  }
+  .org-leaders,
+  .org-core {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .sie-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ============ HALAMAN FOLDER (folder.html) ============ */
+@media (max-width: 767.98px) {
+  .folder-main {
+    padding: 84px 16px 60px;
+  }
+  .folder-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+/* ============ PREVIEW PPT ============ */
+@media (max-width: 767.98px) {
+  .ppt-modal {
+    padding: 12px;
+  }
+  .ppt-modal-card {
+    height: 90vh;
+  }
+}
+
+/* ============ LAYAR SANGAT SEMPIT ============ */
+@media (max-width: 480px) {
+  .video-popup-card {
+    height: min(86vh, 560px);
+  }
+}
+
+@media (max-width: 380px) {
+  .subline {
+    margin-top: 34px;
+  }
+}
