@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Folder PPT · OSIS SMAN 1 Imogiri</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..900;1,9..40,400..900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="folder-page">
+  <div class="grain"></div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="logo">
+      <span class="logo-dot"></span>
+      <span class="logo-text">
+        <span class="logo-pill"></span>
+        smanimori
+      </span>
+    </div>
+    <ul class="nav-links">
+      <li class="nav-pill" aria-hidden="true"></li>
+      <li><a href="index.html#beranda">Beranda</a></li>
+      <li><a href="index.html#struktur">Struktur</a></li>
+      <li><a href="index.html#galeri">Galeri</a></li>
+      <li><a href="index.html#sosmed">Sosmed</a></li>
+    </ul>
+  </nav>
+
+  <main class="folder-main">
+    <a class="folder-back" href="index.html#struktur">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6" />
+      </svg>
+      Kembali ke Struktur
+    </a>
+
+    <header class="folder-head">
+      <div class="folder-big-ic">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+        </svg>
+      </div>
+      <div>
+        <div class="eyebrow">Folder · Presentasi</div>
+        <h1 id="folderTitle">Folder PPT</h1>
+        <p id="folderSub" class="folder-sub">Pilih presentasi untuk dilihat langsung, tanpa unduh.</p>
+      </div>
+    </header>
+
+    <div class="folder-list" id="folderList"></div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo-dot"></span>
+        <span>OSIS SMAN 1 Imogiri</span>
+      </div>
+      <p class="footer-credit">&copy; 2026 OSIS SMAN 1 Imogiri. Dibuat oleh pengurus.</p>
+    </div>
+  </footer>
+
+  <!-- ============ PREVIEW PPT (TANPA UNDUH) ============ -->
+  <div class="ppt-modal" id="pptModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Preview presentasi">
+    <div class="ppt-modal-backdrop" data-ppt-close></div>
+    <div class="ppt-modal-card">
+      <div class="ppt-modal-head">
+        <span class="ppt-modal-name" id="pptModalName">Presentasi</span>
+        <div class="ppt-modal-actions">
+          <a class="ppt-modal-link" id="pptModalOpen" href="#" target="_blank" rel="noopener">Buka di tab baru</a>
+          <button class="ppt-modal-close" type="button" data-ppt-close aria-label="Tutup">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <line x1="6" y1="6" x2="18" y2="18" />
+              <line x1="18" y1="6" x2="6" y2="18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <iframe class="ppt-frame" id="pptFrame" src="" title="Preview presentasi" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <script src="database.js"></script>
+  <script>
+    var params = new URLSearchParams(window.location.search);
+    var group = params.get("sie") || "1";
+    var isPengurus = group === "pengurus";
+    var sie = parseInt(group, 10);
+    if (isNaN(sie)) sie = 1;
+    sie = Math.min(10, Math.max(1, sie));
+
+    var folderKey = isPengurus ? "pengurus" : sie;
+    document.getElementById("folderTitle").textContent = isPengurus
+      ? "Folder PPT Pengurus Inti"
+      : "Folder PPT Sie " + sie;
+    document.getElementById("folderSub").textContent = isPengurus
+      ? "Presentasi dari pengurus inti OSIS SMAN 1 Imogiri."
+      : "Presentasi dari Seksi " + sie + " OSIS SMAN 1 Imogiri.";
+
+    var files = getPPTFiles(folderKey);
+    var list = document.getElementById("folderList");
+
+    if (files.length === 0) {
+      list.innerHTML = '<p class="folder-empty">Folder ini masih kosong.</p>';
+    } else {
+      files.forEach(function (file) {
+        var item = document.createElement("a");
+        item.className = "folder-file";
+        item.href = "#";
+        item.setAttribute("role", "button");
+        item.title = "Lihat tanpa unduh";
+
+        var ic = document.createElement("span");
+        ic.className = "folder-file-ic";
+        ic.innerHTML =
+          '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+          '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>' +
+          '<polyline points="14 2 14 8 20 8"/>' +
+          '<line x1="9" y1="15" x2="15" y2="15"/></svg>';
+
+        var meta = document.createElement("span");
+        meta.className = "folder-file-meta";
+        var nm = document.createElement("span");
+        nm.className = "folder-file-name";
+        nm.textContent = file.name;
+        var sz = document.createElement("span");
+        sz.className = "folder-file-size";
+        sz.textContent = file.size + " · PPT · Klik untuk lihat";
+        meta.appendChild(nm);
+        meta.appendChild(sz);
+
+        var open = document.createElement("span");
+        open.className = "folder-file-open";
+        open.innerHTML =
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">' +
+          '<polyline points="9 18 15 12 9 6"/></svg>';
+
+        item.appendChild(ic);
+        item.appendChild(meta);
+        item.appendChild(open);
+        item.addEventListener("click", function (e) {
+          e.preventDefault();
+          viewPPT(file);
+        });
+        list.appendChild(item);
+      });
+    }
+
+    // ============================================================
+    // PREVIEW: BUKA DI MODAL VIA VIEWER OFFICE (TANPA UNDUH)
+    // ============================================================
+    var modal = document.getElementById("pptModal");
+    var frame = document.getElementById("pptFrame");
+    var modalName = document.getElementById("pptModalName");
+    var modalOpen = document.getElementById("pptModalOpen");
+
+    function viewPPT(file) {
+      frame.src = getPPTViewerUrl(file, true);
+      modalName.textContent = file.name;
+      modalOpen.href = getPPTViewerUrl(file, false);
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closePPT() {
+      if (!modal.classList.contains("open")) return;
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      frame.src = "";
+    }
+
+    modal.querySelectorAll("[data-ppt-close]").forEach(function (el) {
+      el.addEventListener("click", closePPT);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closePPT();
+    });
+  </script>
+</body>
+</html>

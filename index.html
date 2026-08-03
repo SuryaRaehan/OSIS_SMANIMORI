@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OSIS SMAN 1 Imogiri 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..900;1,9..40,400..900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="grain"></div>
+
+  <svg class="svg-defs" width="0" height="0" aria-hidden="true">
+    <defs>
+      <linearGradient id="ico-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop class="ico-stop-1" offset="0%" stop-color="var(--g1)" />
+        <stop class="ico-stop-2" offset="55%" stop-color="var(--g2)" />
+        <stop class="ico-stop-3" offset="100%" stop-color="var(--g3)" />
+      </linearGradient>
+    </defs>
+  </svg>
+
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="logo">
+      <span class="logo-dot"></span>
+      <span class="logo-text">
+        <span class="logo-pill"></span>
+        smanimori
+      </span>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li class="nav-pill" aria-hidden="true"></li>
+      <li><a href="#beranda">Beranda</a></li>
+      <li><a href="#motto">Motto</a></li>
+      <li><a href="#struktur">Struktur</a></li>
+      <li><a href="#galeri">Galeri</a></li>
+      <li><a href="#sosmed">Sosmed</a></li>
+    </ul>
+    <div class="nav-right">
+      <a class="nav-cta" href="daftar.html">
+        Yuk Join
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <line x1="7" y1="17" x2="17" y2="7" />
+          <polyline points="7 7 17 7 17 17" />
+        </svg>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Edge fade: gradasi lembut di tepi atas saat elemen mendekati navbar -->
+  <div class="scroll-edge-fade" id="scrollEdgeFade" aria-hidden="true"></div>
+
+  <main>
+    <!-- ============ HERO / BUMPER ============ -->
+    <section class="hero" id="beranda">
+      <div class="hero-bg"></div>
+      <h1 class="small-team" id="smallTeam">
+        <span class="word"><span>Pengurus</span></span>&nbsp;<span class="word"><span>osis,</span></span>
+      </h1>
+
+      <div class="big-results-wrap">
+        <div class="big-results" id="bigResults">
+          <span class="letter">s</span><span class="letter">m</span><span class="letter">a</span><span class="letter">n</span><span class="letter">i</span><span class="letter">m</span><span class="letter">o</span><span class="letter">r</span><span class="letter">i</span>
+        </div>
+      </div>
+
+      <!-- Fan carousel of portraits -->
+      <div class="fan-carousel" id="fanCarousel" aria-label="Galeri pengurus">
+        <div class="fan-layout"></div>
+        <div class="fan-controls">
+          <button class="fan-arrow fan-prev" type="button" aria-label="Sebelumnya">
+            <svg class="fan-arrow-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+          <div class="fan-dots"></div>
+          <button class="fan-arrow fan-next" type="button" aria-label="Berikutnya">
+            <svg class="fan-arrow-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="subline" id="subline">
+        <button class="arrow-pill">
+          Explore
+          <span class="ar">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <line x1="7" y1="17" x2="17" y2="7" />
+              <polyline points="7 7 17 7 17 17" />
+            </svg>
+          </span>
+        </button>
+        <div class="subline-text">@osis sman 1 imogiri 2026</div>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 2: MOTTO OSIS + TABEL PROJECT ============ -->
+    <section class="motto" id="motto">
+      <div class="team-head">
+        <div>
+          <div class="eyebrow">Motto · Visi OSIS</div>
+          <h2>Raih Prestasi,<br />Satukan Potensi, <em>Suarakan Aspirasi</em>.</h2>
+        </div>
+        <p>Setiap dari kita punya peran, nggak ada yang cuma jadi penonton. OSIS itu jembatan, kolaborasi langsung antara mimpi kamu dan realisasi nyata. No middleman, just pure teamwork.</p>
+      </div>
+
+      <div class="stats-table-wrap">
+        <table class="stats-table">
+          <thead>
+            <tr>
+              <th>Kategori</th>
+              <th class="th-num">Jumlah</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Program Kerja</td>
+              <td class="num" data-count="62"><span>0</span></td>
+            </tr>
+            <tr>
+              <td>Anggota Aktif</td>
+              <td class="num" data-count="14"><span>0</span></td>
+            </tr>
+            <tr>
+              <td>Divisi</td>
+              <td class="num" data-count="9"><span>0</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 3: GALERI FOTO (SCROLL BERSILANGAN) ============ -->
+    <section class="gallery" id="galeri">
+      <div class="gallery-wrap">
+        <div class="g-row g-row-1">
+          <div class="g-img"><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=640&h=400&fit=crop&q=80" alt="" loading="lazy" /></div>
+          <div class="g-img"><img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=640&h=400&fit=crop&q=80" alt="" loading="lazy" /></div>
+          <div class="g-img"><img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=640&h=400&fit=crop&q=80" alt="" loading="lazy" /></div>
+          <div class="g-img"><img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=640&h=400&fit=crop&q=80" alt="" loading="lazy" /></div>
+          <div class="g-img"><img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=640&h=400&fit=crop&q=80" alt="" loading="lazy" /></div>
+          <div class="g-img"><img src="https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=640&h=400&fit=crop&q=80" alt="" loading="lazy" /></div>
+          <div class="g-img"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=640&h=400&fit=crop&q=80" alt="" loading="lazy" /></div>
+          <div class="g-img"><img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=640&h=400&fit=crop&q=80" alt="" loading="lazy" /></div>
+          <div class="g-img"><img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=640&h=400&fit=crop&q=80" alt="" loading="lazy" /></div>
+          <div class="g-img"><img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=640&h=400&fit=crop&q=80" alt="" loading="lazy" /></div>
+        </div>
+        <div class="g-row g-row-2">
+          <div class="g-img"><img src="https://images.unsplash.com/photo-1496564203457-11bb12075d90?w=640&h=400&fit=crop&q=80" alt="" loading="lazy" /></div>
+          <div class="g-img"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=640&h=400&fit=crop&q=80" alt="" loading="lazy" /></div>
+          <div class="g-img"><img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=640&h=400&fit=crop&q=80" alt="" loading="lazy" /></div>
+          <div class="g-img"><img src="https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=640&h=400&fit=crop&q=80" alt="" loading="lazy" /></div>
+          <div class="g-img"><img src="https://images.unsplash.com/photo-1531219572328-a0171b4448a3?w=640&h=400&fit=crop&q=80" alt="" loading="lazy" /></div>
+          <div class="g-img"><img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=640&h=400&fit=crop&q=80" alt="" loading="lazy" /></div>
+          <div class="g-img"><img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=640&h=400&fit=crop&q=80" alt="" loading="lazy" /></div>
+          <div class="g-img"><img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=640&h=400&fit=crop&q=80" alt="" loading="lazy" /></div>
+          <div class="g-img"><img src="https://images.unsplash.com/photo-1478827536114-da961b7f86d2?w=640&h=400&fit=crop&q=80" alt="" loading="lazy" /></div>
+          <div class="g-img"><img src="https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?w=640&h=400&fit=crop&q=80" alt="" loading="lazy" /></div>
+        </div>
+        <div class="g-row g-row-3">
+          <div class="g-img"><img src="https://images.unsplash.com/photo-1428908728789-d2de25dbd4e2?w=640&h=400&fit=crop&q=80" alt="" loading="lazy" /></div>
+          <div class="g-img"><img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=640&h=400&fit=crop&q=80" alt="" loading="lazy" /></div>
+          <div class="g-img"><img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=640&h=400&fit=crop&q=80" alt="" loading="lazy" /></div>
+          <div class="g-img"><img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=640&h=400&fit=crop&q=80" alt="" loading="lazy" /></div>
+          <div class="g-img"><img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=640&h=400&fit=crop&q=80" alt="" loading="lazy" /></div>
+          <div class="g-img"><img src="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=640&h=400&fit=crop&q=80" alt="" loading="lazy" /></div>
+          <div class="g-img"><img src="https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5?w=640&h=400&fit=crop&q=80" alt="" loading="lazy" /></div>
+          <div class="g-img"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=640&h=400&fit=crop&q=80" alt="" loading="lazy" /></div>
+          <div class="g-img"><img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=640&h=400&fit=crop&q=80" alt="" loading="lazy" /></div>
+          <div class="g-img"><img src="https://images.unsplash.com/photo-1477346611705-65d1883cee1e?w=640&h=400&fit=crop&q=80" alt="" loading="lazy" /></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 3.5: GALERI EXPANDABLE ============ -->
+    <section class="expand-gallery" id="expandable">
+      <div class="expand-head">
+        <div class="eyebrow">Galeri · Expandable</div>
+        <h2>Petualangan <em>Setahun</em> Kami.</h2>
+      </div>
+
+<div class="eg-grid">
+        <div class="eg-strip">
+          <div class="eg-item" data-src="https://images.unsplash.com/photo-1709884735646-897b57461d61?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3">
+            <img src="https://images.unsplash.com/photo-1709884735646-897b57461d61?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Galeri 1" loading="lazy" />
+            <span class="eg-overlay"></span>
+            <span class="eg-caption">Momen 1</span>
+          </div>
+          <div class="eg-item" data-src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3">
+            <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Galeri 2" loading="lazy" />
+            <span class="eg-overlay"></span>
+            <span class="eg-caption">Momen 2</span>
+          </div>
+          <div class="eg-item" data-src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3">
+            <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Galeri 3" loading="lazy" />
+            <span class="eg-overlay"></span>
+            <span class="eg-caption">Momen 3</span>
+          </div>
+          <div class="eg-item" data-src="https://images.unsplash.com/photo-1502085671122-2d218cd434e6?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3">
+            <img src="https://images.unsplash.com/photo-1502085671122-2d218cd434e6?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Galeri 4" loading="lazy" />
+            <span class="eg-overlay"></span>
+            <span class="eg-caption">Momen 4</span>
+          </div>
+        </div>
+        <div class="eg-strip">
+          <div class="eg-item" data-src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&auto=format&fit=crop&q=80">
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1000&auto=format&fit=crop&q=80" alt="Galeri 5" loading="lazy" />
+            <span class="eg-overlay"></span>
+            <span class="eg-caption">Momen 5</span>
+          </div>
+          <div class="eg-item" data-src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1600&auto=format&fit=crop&q=80">
+            <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=640&auto=format&fit=crop&q=80" alt="Galeri 6" loading="lazy" />
+            <span class="eg-overlay"></span>
+            <span class="eg-caption">Momen 6</span>
+          </div>
+          <div class="eg-item" data-src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1600&auto=format&fit=crop&q=80">
+            <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=640&auto=format&fit=crop&q=80" alt="Galeri 7" loading="lazy" />
+            <span class="eg-overlay"></span>
+            <span class="eg-caption">Momen 7</span>
+          </div>
+          <div class="eg-item" data-src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=1600&auto=format&fit=crop&q=80">
+            <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=640&auto=format&fit=crop&q=80" alt="Galeri 8" loading="lazy" />
+            <span class="eg-overlay"></span>
+            <span class="eg-caption">Momen 8</span>
+          </div>
+        </div>
+        <div class="eg-strip">
+          <div class="eg-item" data-src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1600&auto=format&fit=crop&q=80">
+            <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=640&auto=format&fit=crop&q=80" alt="Galeri 9" loading="lazy" />
+            <span class="eg-overlay"></span>
+            <span class="eg-caption">Momen 9</span>
+          </div>
+          <div class="eg-item" data-src="https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=1600&auto=format&fit=crop&q=80">
+            <img src="https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=640&auto=format&fit=crop&q=80" alt="Galeri 10" loading="lazy" />
+            <span class="eg-overlay"></span>
+            <span class="eg-caption">Momen 10</span>
+          </div>
+          <div class="eg-item" data-src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1600&auto=format&fit=crop&q=80">
+            <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=640&auto=format&fit=crop&q=80" alt="Galeri 11" loading="lazy" />
+            <span class="eg-overlay"></span>
+            <span class="eg-caption">Momen 11</span>
+          </div>
+          <div class="eg-item" data-src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1600&auto=format&fit=crop&q=80">
+            <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=640&auto=format&fit=crop&q=80" alt="Galeri 12" loading="lazy" />
+            <span class="eg-overlay"></span>
+            <span class="eg-caption">Momen 12</span>
+          </div>
+        </div>
+        <div class="eg-strip">
+          <div class="eg-item" data-src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1600&auto=format&fit=crop&q=80">
+            <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=640&auto=format&fit=crop&q=80" alt="Galeri 13" loading="lazy" />
+            <span class="eg-overlay"></span>
+            <span class="eg-caption">Momen 13</span>
+          </div>
+          <div class="eg-item" data-src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=1600&auto=format&fit=crop&q=80">
+            <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=640&auto=format&fit=crop&q=80" alt="Galeri 14" loading="lazy" />
+            <span class="eg-overlay"></span>
+            <span class="eg-caption">Momen 14</span>
+          </div>
+          <div class="eg-item" data-src="https://images.unsplash.com/photo-1496564203457-11bb12075d90?w=1600&auto=format&fit=crop&q=80">
+            <img src="https://images.unsplash.com/photo-1496564203457-11bb12075d90?w=640&auto=format&fit=crop&q=80" alt="Galeri 15" loading="lazy" />
+            <span class="eg-overlay"></span>
+            <span class="eg-caption">Momen 15</span>
+          </div>
+          <div class="eg-item" data-src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&auto=format&fit=crop&q=80">
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=640&auto=format&fit=crop&q=80" alt="Galeri 16" loading="lazy" />
+            <span class="eg-overlay"></span>
+            <span class="eg-caption">Momen 16</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 4: STRUKTUR KEPENGURUSAN ============ -->
+    <section class="team-section" id="struktur">
+      <div class="team-title">
+        <div class="eyebrow">Struktur · Jabatan</div>
+        <h2>Struktur Kepengurusan <em>OSIS</em></h2>
+      </div>
+
+      <!-- Tombol folder pengurus inti -->
+      <div class="org-folder-wrap">
+        <button class="org-folder" type="button" title="Buka folder PPT pengurus">
+          <svg class="ico-path" width="14" height="14" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          Folder PPT Pengurus
+        </button>
+      </div>
+
+      <!-- Pemimpin inti -->
+      <div class="org-leaders">
+        <div class="org-card">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&crop=faces&q=80" alt="" />
+          <div class="org-meta">
+            <div class="org-nm">Ketua OSIS</div>
+            <div class="org-rl">Nama Lengkap</div>
+          </div>
+        </div>
+        <div class="org-card">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=500&fit=crop&crop=faces&q=80" alt="" />
+          <div class="org-meta">
+            <div class="org-nm">Wakil Ketua</div>
+            <div class="org-rl">Nama Lengkap</div>
+          </div>
+        </div>
+        <div class="org-card">
+          <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=500&fit=crop&crop=faces&q=80" alt="" />
+          <div class="org-meta">
+            <div class="org-nm">Ketua II</div>
+            <div class="org-rl">Nama Lengkap</div>
+          </div>
+        </div>
+        <div class="org-card">
+          <img src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=400&h=500&fit=crop&crop=faces&q=80" alt="" />
+          <div class="org-meta">
+            <div class="org-nm">Ketua III</div>
+            <div class="org-rl">Nama Lengkap</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sekretaris & Bendahara -->
+      <div class="org-core">
+        <div class="org-card core">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=500&fit=crop&crop=faces&q=80" alt="" />
+          <div class="org-meta">
+            <div class="org-nm">Sekretaris Umum</div>
+            <div class="org-rl">Nama Lengkap</div>
+          </div>
+        </div>
+        <div class="org-card core">
+          <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=400&h=500&fit=crop&crop=faces&q=80" alt="" />
+          <div class="org-meta">
+            <div class="org-nm">Sekretaris Non-Umum</div>
+            <div class="org-rl">Nama Lengkap</div>
+          </div>
+        </div>
+        <div class="org-card core">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=500&fit=crop&crop=faces&q=80" alt="" />
+          <div class="org-meta">
+            <div class="org-nm">Bendahara Umum</div>
+            <div class="org-rl">Nama Lengkap</div>
+          </div>
+        </div>
+        <div class="org-card core">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=500&fit=crop&crop=faces&q=80" alt="" />
+          <div class="org-meta">
+            <div class="org-nm">Bendahara Non-Umum</div>
+            <div class="org-rl">Nama Lengkap</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Seksi-seksi (Sie 1-10) -->
+      <div class="sie-grid">
+        <div class="sie">
+          <button class="sie-btn">
+            Sie 1
+            <svg class="ico-path" width="14" height="14" viewBox="0 0 24 24"><path d="M11 3h2v8h8v2h-8v8h-2v-8H3v-2h8z"/></svg>
+          </button>
+          <button class="sie-folder" type="button" title="Buka folder PPT">
+            <svg class="ico-path" width="14" height="14" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            Folder PPT
+          </button>
+          <div class="sie-body">
+            <div class="sie-body-inner">
+              <div class="sie-member"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=96&h=96&fit=crop&crop=faces&q=80" alt="" /><span>Nama Anggota 1</span></div>
+              <div class="sie-member"><img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=96&h=96&fit=crop&crop=faces&q=80" alt="" /><span>Nama Anggota 2</span></div>
+              <div class="sie-member"><img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=96&h=96&fit=crop&crop=faces&q=80" alt="" /><span>Nama Anggota 3</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="sie">
+          <button class="sie-btn">
+            Sie 2
+            <svg class="ico-path" width="14" height="14" viewBox="0 0 24 24"><path d="M11 3h2v8h8v2h-8v8h-2v-8H3v-2h8z"/></svg>
+          </button>
+          <button class="sie-folder" type="button" title="Buka folder PPT">
+            <svg class="ico-path" width="14" height="14" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            Folder PPT
+          </button>
+          <div class="sie-body">
+            <div class="sie-body-inner">
+              <div class="sie-member"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=96&h=96&fit=crop&crop=faces&q=80" alt="" /><span>Nama Anggota 1</span></div>
+              <div class="sie-member"><img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=96&h=96&fit=crop&crop=faces&q=80" alt="" /><span>Nama Anggota 2</span></div>
+              <div class="sie-member"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=96&h=96&fit=crop&crop=faces&q=80" alt="" /><span>Nama Anggota 3</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="sie">
+          <button class="sie-btn">
+            Sie 3
+            <svg class="ico-path" width="14" height="14" viewBox="0 0 24 24"><path d="M11 3h2v8h8v2h-8v8h-2v-8H3v-2h8z"/></svg>
+          </button>
+          <button class="sie-folder" type="button" title="Buka folder PPT">
+            <svg class="ico-path" width="14" height="14" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            Folder PPT
+          </button>
+          <div class="sie-body">
+            <div class="sie-body-inner">
+              <div class="sie-member"><img src="https://images.unsplash.com/photo-1554151228-14d9def656e4?w=96&h=96&fit=crop&crop=faces&q=80" alt="" /><span>Nama Anggota 1</span></div>
+              <div class="sie-member"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=96&h=96&fit=crop&crop=faces&q=80" alt="" /><span>Nama Anggota 2</span></div>
+              <div class="sie-member"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=96&h=96&fit=crop&crop=faces&q=80" alt="" /><span>Nama Anggota 3</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="sie">
+          <button class="sie-btn">
+            Sie 4
+            <svg class="ico-path" width="14" height="14" viewBox="0 0 24 24"><path d="M11 3h2v8h8v2h-8v8h-2v-8H3v-2h8z"/></svg>
+          </button>
+          <button class="sie-folder" type="button" title="Buka folder PPT">
+            <svg class="ico-path" width="14" height="14" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            Folder PPT
+          </button>
+          <div class="sie-body">
+            <div class="sie-body-inner">
+              <div class="sie-member"><img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=96&h=96&fit=crop&crop=faces&q=80" alt="" /><span>Nama Anggota 1</span></div>
+              <div class="sie-member"><img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=96&h=96&fit=crop&crop=faces&q=80" alt="" /><span>Nama Anggota 2</span></div>
+              <div class="sie-member"><img src="https://images.unsplash.com/photo-1509967419530-da38b4704bc6?w=96&h=96&fit=crop&crop=faces&q=80" alt="" /><span>Nama Anggota 3</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="sie">
+          <button class="sie-btn">
+            Sie 5
+            <svg class="ico-path" width="14" height="14" viewBox="0 0 24 24"><path d="M11 3h2v8h8v2h-8v8h-2v-8H3v-2h8z"/></svg>
+          </button>
+          <button class="sie-folder" type="button" title="Buka folder PPT">
+            <svg class="ico-path" width="14" height="14" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            Folder PPT
+          </button>
+          <div class="sie-body">
+            <div class="sie-body-inner">
+              <div class="sie-member"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=96&h=96&fit=crop&crop=faces&q=80" alt="" /><span>Nama Anggota 1</span></div>
+              <div class="sie-member"><img src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=96&h=96&fit=crop&crop=faces&q=80" alt="" /><span>Nama Anggota 2</span></div>
+              <div class="sie-member"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=96&h=96&fit=crop&crop=faces&q=80" alt="" /><span>Nama Anggota 3</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="sie">
+          <button class="sie-btn">
+            Sie 6
+            <svg class="ico-path" width="14" height="14" viewBox="0 0 24 24"><path d="M11 3h2v8h8v2h-8v8h-2v-8H3v-2h8z"/></svg>
+          </button>
+          <button class="sie-folder" type="button" title="Buka folder PPT">
+            <svg class="ico-path" width="14" height="14" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            Folder PPT
+          </button>
+          <div class="sie-body">
+            <div class="sie-body-inner">
+              <div class="sie-member"><img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?w=96&h=96&fit=crop&crop=faces&q=80" alt="" /><span>Nama Anggota 1</span></div>
+              <div class="sie-member"><img src="https://images.unsplash.com/photo-1521119989659-a83eee488004?w=96&h=96&fit=crop&crop=faces&q=80" alt="" /><span>Nama Anggota 2</span></div>
+              <div class="sie-member"><img src="https://images.unsplash.com/photo-1541647376583-8934aaf3448a?w=96&h=96&fit=crop&crop=faces&q=80" alt="" /><span>Nama Anggota 3</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="sie">
+          <button class="sie-btn">
+            Sie 7
+            <svg class="ico-path" width="14" height="14" viewBox="0 0 24 24"><path d="M11 3h2v8h8v2h-8v8h-2v-8H3v-2h8z"/></svg>
+          </button>
+          <button class="sie-folder" type="button" title="Buka folder PPT">
+            <svg class="ico-path" width="14" height="14" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            Folder PPT
+          </button>
+          <div class="sie-body">
+            <div class="sie-body-inner">
+              <div class="sie-member"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=96&h=96&fit=crop&crop=faces&q=80" alt="" /><span>Nama Anggota 1</span></div>
+              <div class="sie-member"><img src="https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?w=96&h=96&fit=crop&crop=faces&q=80" alt="" /><span>Nama Anggota 2</span></div>
+              <div class="sie-member"><img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=96&h=96&fit=crop&crop=faces&q=80" alt="" /><span>Nama Anggota 3</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="sie">
+          <button class="sie-btn">
+            Sie 8
+            <svg class="ico-path" width="14" height="14" viewBox="0 0 24 24"><path d="M11 3h2v8h8v2h-8v8h-2v-8H3v-2h8z"/></svg>
+          </button>
+          <button class="sie-folder" type="button" title="Buka folder PPT">
+            <svg class="ico-path" width="14" height="14" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            Folder PPT
+          </button>
+          <div class="sie-body">
+            <div class="sie-body-inner">
+              <div class="sie-member"><img src="https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?w=96&h=96&fit=crop&crop=faces&q=80" alt="" /><span>Nama Anggota 1</span></div>
+              <div class="sie-member"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=96&h=96&fit=crop&crop=faces&q=80" alt="" /><span>Nama Anggota 2</span></div>
+              <div class="sie-member"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=96&h=96&fit=crop&crop=faces&q=80" alt="" /><span>Nama Anggota 3</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="sie">
+          <button class="sie-btn">
+            Sie 9
+            <svg class="ico-path" width="14" height="14" viewBox="0 0 24 24"><path d="M11 3h2v8h8v2h-8v8h-2v-8H3v-2h8z"/></svg>
+          </button>
+          <button class="sie-folder" type="button" title="Buka folder PPT">
+            <svg class="ico-path" width="14" height="14" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            Folder PPT
+          </button>
+          <div class="sie-body">
+            <div class="sie-body-inner">
+              <div class="sie-member"><img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=96&h=96&fit=crop&crop=faces&q=80" alt="" /><span>Nama Anggota 1</span></div>
+              <div class="sie-member"><img src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=96&h=96&fit=crop&crop=faces&q=80" alt="" /><span>Nama Anggota 2</span></div>
+              <div class="sie-member"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=96&h=96&fit=crop&crop=faces&q=80" alt="" /><span>Nama Anggota 3</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="sie">
+          <button class="sie-btn">
+            Sie 10
+            <svg class="ico-path" width="14" height="14" viewBox="0 0 24 24"><path d="M11 3h2v8h8v2h-8v8h-2v-8H3v-2h8z"/></svg>
+          </button>
+          <button class="sie-folder" type="button" title="Buka folder PPT">
+            <svg class="ico-path" width="14" height="14" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            Folder PPT
+          </button>
+          <div class="sie-body">
+            <div class="sie-body-inner">
+              <div class="sie-member"><img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=96&h=96&fit=crop&crop=faces&q=80" alt="" /><span>Nama Anggota 1</span></div>
+              <div class="sie-member"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=96&h=96&fit=crop&crop=faces&q=80" alt="" /><span>Nama Anggota 2</span></div>
+              <div class="sie-member"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=96&h=96&fit=crop&crop=faces&q=80" alt="" /><span>Nama Anggota 3</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER / SOSMED ============ -->
+  <footer class="footer" id="sosmed">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo-dot"></span>
+        <span>OSIS SMAN 1 Imogiri</span>
+      </div>
+      <p class="footer-tag">Kepengurusan 2025/2026 - Raih Prestasi, Satukan Potensi, Suarakan Aspirasi.</p>
+      <div class="footer-sosmed">
+        <a href="#" target="_blank" rel="https://www.instagram.com/osis_sman1imogiri?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">Instagram</a>
+        <a href="#" target="_blank" rel="noopener">TikTok</a>
+        <a href="#" target="_blank" rel="noopener">YouTube</a>
+        <a href="mailto:osis@sman1imogiri.sch.id">Email</a>
+      </div>
+      <p class="footer-credit">&copy; 2026 OSIS SMAN 1 Imogiri. Dibuat oleh sie-9.</p>
+    </div>
+  </footer>
+
+  <!-- ============ POPUP VIDEO EXPLORE (9:16, MENGAMBANG) ============ -->
+  <div class="video-popup" id="videoPopup" aria-hidden="true">
+    <div class="video-popup-backdrop" data-close-popup></div>
+    <div class="video-popup-card" role="dialog" aria-modal="true" aria-label="Video Explore">
+      <button class="video-popup-close" type="button" data-close-popup aria-label="Tutup">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <line x1="6" y1="6" x2="18" y2="18" />
+          <line x1="18" y1="6" x2="6" y2="18" />
+        </svg>
+      </button>
+      <video
+        class="video-popup-video"
+        src="https://www.w3schools.com/html/mov_bbb.mp4"
+        controls
+        playsinline
+        preload="none"
+      ></video>
+    </div>
+  </div>
+
+  <!-- ============ POPUP GALERI EXPANDABLE ============ -->
+  <div class="eg-modal" id="egModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Galeri">
+    <div class="eg-modal-backdrop" data-eg-close></div>
+
+    <button class="eg-btn eg-close" type="button" data-eg-close aria-label="Tutup">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <line x1="6" y1="6" x2="18" y2="18" />
+        <line x1="18" y1="6" x2="6" y2="18" />
+      </svg>
+    </button>
+
+    <button class="eg-btn eg-prev" type="button" data-eg-prev aria-label="Sebelumnya">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6" />
+      </svg>
+    </button>
+
+    <div class="eg-stage">
+      <img id="egImg" src="" alt="" />
+    </div>
+
+    <button class="eg-btn eg-next" type="button" data-eg-next aria-label="Berikutnya">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6" />
+      </svg>
+    </button>
+
+    <div class="eg-counter" id="egCounter">1 / 4</div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="script.js"></script>
+  <script src="card-fan-carousel.js"></script>
+</body>
+</html>

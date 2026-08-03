@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pendaftaran | OSIS SMAN 1 Imogiri 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..900;1,9..40,400..900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="grain"></div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <a class="logo" href="index.html" style="text-decoration: none; color: inherit;">
+      <span class="logo-dot"></span>
+      <span class="logo-text">
+        <span class="logo-pill"></span>
+        smanimori
+      </span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li class="nav-pill" aria-hidden="true"></li>
+      <li><a href="index.html#beranda">Beranda</a></li>
+      <li><a href="index.html#motto">Motto</a></li>
+      <li><a href="index.html#struktur">Struktur</a></li>
+      <li><a href="index.html#galeri">Galeri</a></li>
+      <li><a href="index.html#sosmed">Sosmed</a></li>
+    </ul>
+    <div class="nav-right">
+      <a class="nav-cta" href="daftar.html">
+        Yuk Join
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <line x1="7" y1="17" x2="17" y2="7" />
+          <polyline points="7 7 17 7 17 17" />
+        </svg>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ============ PENDAFTARAN ============ -->
+    <section class="daftar" id="daftar">
+      <div class="daftar-head">
+        <div class="eyebrow">Pendaftaran · Terbuka</div>
+        <h1>Daftar Menjadi <em>Pengurus OSIS</em></h1>
+        <p>Lengkapi formulir pendaftaran di bawah ini. Pastikan data yang kamu isi benar, karena akan dipakai untuk verifikasi. Periode pendaftaran: 1 - 31 Agustus 2026.</p>
+      </div>
+
+      <div class="daftar-card">
+        <iframe
+          src="https://forms.gle/rVXqXXsfnU2c4QSG9"
+          loading="lazy"
+          title="Formulir Pendaftaran OSIS">
+        </iframe>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer" id="sosmed">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo-dot"></span>
+        <span>OSIS SMAN 1 Imogiri</span>
+      </div>
+      <p class="footer-tag">Kepengurusan 2025/2026 - Raih Prestasi, Satukan Potensi, Suarakan Aspirasi.</p>
+      <div class="footer-sosmed">
+        <a href="#" target="_blank" rel="noopener">Instagram</a>
+        <a href="#" target="_blank" rel="noopener">TikTok</a>
+        <a href="#" target="_blank" rel="noopener">YouTube</a>
+        <a href="mailto:osis@sman1imogiri.sch.id">Email</a>
+      </div>
+      <p class="footer-credit">&copy; 2026 OSIS SMAN 1 Imogiri. Dibuat oleh pengurus.</p>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById("navToggle");
+    const links = document.getElementById("navLinks");
+    if (toggle && links) {
+      toggle.addEventListener("click", () => {
+        const open = links.classList.toggle("open");
+        toggle.classList.toggle("open", open);
+        toggle.setAttribute("aria-expanded", String(open));
+      });
+      links.querySelectorAll("a").forEach((a) =>
+        a.addEventListener("click", () => {
+          links.classList.remove("open");
+          toggle.classList.remove("open");
+        })
+      );
+    }
+  </script>
+</body>
+</html>
