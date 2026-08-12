@@ -1,0 +1,17 @@
+# Node
+node_modules/
+npm-debug.log*
+
+# Cloudflare Worker
+worker/.wrangler/
+worker/wrangler-state/
+.wrangler/
+
+# Secrets / env
+.env
+.env.local
+
+# OS
+Thumbs.db
+.DS_Store
+desktop.ini

@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Folder PPT · OSIS SMAN 1 Imogiri</title>
+  <title>Drive Kegiatan · OSIS SMAN 1 Imogiri</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..900;1,9..40,400..900&display=swap" rel="stylesheet" />
@@ -34,27 +34,34 @@
   </nav>
 
   <main class="folder-main">
-    <a class="folder-back" href="index.html#struktur">
+    <a class="folder-back" href="index.html#expandable">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="15 18 9 12 15 6" />
       </svg>
-      Kembali ke Struktur
+      Kembali ke Galeri
     </a>
 
     <header class="folder-head">
       <div class="folder-big-ic">
-        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 287.5 250" width="38" height="33" aria-hidden="true">
+          <mask id="drv-mask-head">
+            <path fill="#fff" d="M190.7,0H96.8L0,168.8l45.8,81.2h195.9l45.8-81.2C287.5,168.8,190.7,0,190.7,0z M92.9,168.8l50.9-87.8l50.9,87.8H92.9z"/>
+          </mask>
+          <g mask="url(#drv-mask-head)">
+            <path fill="#4285F4" d="M45.8,168.8V250h195.9l45.8-81.2H45.8z"/>
+            <path fill="#0F9D58" d="M96.8,0L0,168.8L45.8,250L156.2,59.4L96.8,0z"/>
+            <path fill="#FFCD40" d="M190.7,0H96.8l97.8,168.8h92.9L190.7,0z"/>
+          </g>
         </svg>
       </div>
       <div>
-        <div class="eyebrow">Folder · Presentasi</div>
-        <h1 id="folderTitle">Folder PPT</h1>
-        <p id="folderSub" class="folder-sub">Pilih presentasi untuk dilihat langsung, tanpa unduh.</p>
+        <div class="eyebrow">Galeri · Google Drive</div>
+        <h1>Drive Kegiatan</h1>
+        <p class="folder-sub">Dokumentasi kegiatan OSIS SMAN 1 Imogiri. Pilih kegiatan untuk membuka folder-nya di Google Drive.</p>
       </div>
     </header>
 
-    <div class="folder-list" id="folderList"></div>
+    <div class="folder-list" id="driveList"></div>
   </main>
 
   <!-- FOOTER -->
@@ -68,29 +75,9 @@
     </div>
   </footer>
 
-  <!-- ============ PREVIEW PPT (TANPA UNDUH) ============ -->
-  <div class="ppt-modal" id="pptModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Preview presentasi">
-    <div class="ppt-modal-backdrop" data-ppt-close></div>
-    <div class="ppt-modal-card">
-      <div class="ppt-modal-head">
-        <span class="ppt-modal-name" id="pptModalName">Presentasi</span>
-        <div class="ppt-modal-actions">
-          <a class="ppt-modal-link" id="pptModalOpen" href="#" target="_blank" rel="noopener">Buka di tab baru</a>
-          <button class="ppt-modal-close" type="button" data-ppt-close aria-label="Tutup">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-              <line x1="6" y1="6" x2="18" y2="18" />
-              <line x1="18" y1="6" x2="6" y2="18" />
-            </svg>
-          </button>
-        </div>
-      </div>
-      <iframe class="ppt-frame" id="pptFrame" src="" title="Preview presentasi" allowfullscreen></iframe>
-    </div>
-  </div>
-
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
   <script src="config.js"></script>
   <script src="api.js"></script>
-  <script src="folder.js"></script>
+  <script src="drive.js"></script>
 </body>
 </html>

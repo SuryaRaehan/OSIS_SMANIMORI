@@ -579,6 +579,58 @@ body {
   letter-spacing: 0.06em;
 }
 
+/* ============ DRIVE KEGIATAN: TOMBOL + PANEL LINKS ============ */
+.drive-cta-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin: 44px auto 0;
+  padding: 0 40px;
+}
+.drive-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--ink);
+  color: #fafaf7;
+  border: none;
+  padding: 12px 20px 12px 24px;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 14px 24px -8px rgba(0, 0, 0, 0.4),
+    0 5px 10px -2px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.4);
+  transition: transform 0.4s cubic-bezier(0.6, 0, 0.2, 1);
+}
+.drive-cta:hover {
+  transform: translateY(-2px);
+}
+.drive-cta .drv-ico {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, var(--orange-1), var(--orange-3));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s cubic-bezier(0.6, 0, 0.2, 1);
+}
+.drive-cta .drv-ico svg {
+  width: 17px;
+  height: 14.8px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
+}
+.drive-cta:hover .drv-ico {
+  transform: scale(1.1) rotate(-6deg);
+}
+
+/* ============ SECTION 2: TEAM GRID ============ */
+
 /* ============ SECTION 2: TEAM GRID ============ */
 .team-section {
   padding: 70px 40px 90px;
@@ -1428,6 +1480,7 @@ body {
    font-size, dan transform hover asli tiap tombol tetap dipertahankan. */
 .nav-cta,
 .subline .arrow-pill,
+.drive-cta,
 .fan-arrow,
 .sie-btn,
 .sie-folder,
@@ -1487,6 +1540,7 @@ body {
 /* Border gradient tipis mengikuti bentuk tombol (tidak mengubah ukuran) */
 .nav-cta::before,
 .subline .arrow-pill::before,
+.drive-cta::before,
 .fan-arrow::before,
 .sie-btn::before,
 .sie-folder::before,
@@ -1513,6 +1567,7 @@ body {
 /* Hover: gradient "oranye-emas" sesuai konsep, transform asli tetap jalan */
 .nav-cta:hover,
 .subline .arrow-pill:hover,
+.drive-cta:hover,
 .fan-arrow:hover,
 .sie-btn:hover,
 .sie-folder:hover,
@@ -1709,6 +1764,23 @@ body {
   color: var(--mute);
   font-weight: 600;
   padding: 48px 0;
+}
+.folder-empty .folder-retry {
+  margin-top: 16px;
+  padding: 10px 22px;
+  border: 1px solid var(--line, rgba(255, 255, 255, 0.15));
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.folder-empty .folder-retry:hover {
+  background: var(--orange-1);
+  border-color: var(--orange-1);
+  color: #1d1d4e;
 }
 
 /* ============ PREVIEW PPT (TANPA UNDUH) ============ */
