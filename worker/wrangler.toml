@@ -6,4 +6,4 @@ compatibility_date = "2026-08-01"
 # Daftar asal (Origin) yang diizinkan meminta data, pisah dengan koma.
 # Isi dengan domain situs Anda, mis. "https://suryaraehan.github.io" atau
 # "https://smanimori.com". TANPA garis miring di akhir.
-ALLOWED_ORIGINS = "https://suryaraehan.github.io"
+ALLOWED_ORIGINS = "https://suryaraehan.github.io,http://localhost:3000,http://127.0.0.1:3000"

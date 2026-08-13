@@ -65,9 +65,12 @@
     })
     .catch(function (err) {
       list.innerHTML =
-        '<div class="folder-empty">' +
-        "<p>" + (err && err.message ? err.message : "Gagal memuat folder. Coba lagi.") + "</p>" +
-        '<button type="button" class="folder-retry" onclick="location.reload()">Coba Lagi</button>' +
-        "</div>";
+        '<div class="folder-empty"><p>' + (err && err.message ? err.message : "Gagal memuat folder. Coba lagi.") + "</p></div>";
+      var retry = document.createElement("button");
+      retry.type = "button";
+      retry.className = "folder-retry";
+      retry.textContent = "Coba Lagi";
+      retry.addEventListener("click", function () { location.reload(); });
+      list.querySelector(".folder-empty").appendChild(retry);
     });
 })();
