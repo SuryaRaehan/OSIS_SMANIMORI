@@ -40,28 +40,30 @@ intro
 
 // ============================================================
 // SCROLL: "big results" SCALES UP
+// Tween scrub langsung (tanpa onUpdate / gsap.set per frame)
 // ============================================================
-ScrollTrigger.create({
-  trigger: ".hero",
-  start: "top top",
-  end: "bottom top",
-  scrub: 0.8,
-  onUpdate: (self) => {
-    const p = self.progress;
-    // Big results scales up and stays gray
-    gsap.set(".big-results", { scale: 1 + 0.15 * p, opacity: 1 - 0.4 * p });
-    // Small team rises out
-    gsap.set(".small-team", {
-      y: -60 * p,
-      opacity: Math.max(0, 1 - p * 1.5)
-    });
-    gsap.set("#subline", { opacity: Math.max(0, 1 - p * 2) });
-    // Fan carousel fades + merendah agar tidak bertabrakan dengan navbar
-    gsap.set(".fan-carousel", {
-      y: 80 * p,
-      opacity: Math.max(0, 1 - p * 1.6)
-    });
-  }
+gsap.to(".big-results", {
+  scale: 1.15,
+  opacity: 0.6,
+  ease: "none",
+  scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.8 }
+});
+gsap.to(".small-team", {
+  y: -60,
+  opacity: 0,
+  ease: "none",
+  scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.8 }
+});
+gsap.to("#subline", {
+  opacity: 0,
+  ease: "none",
+  scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.8 }
+});
+gsap.to(".fan-carousel", {
+  y: 80,
+  opacity: 0,
+  ease: "none",
+  scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.8 }
 });
 
 // ============================================================
@@ -209,12 +211,19 @@ ScrollTrigger.create({
 
 // ============================================================
 // GALERI: SCROLL VERTIKAL -> GULIR HORIZONTAL BERSILANGAN
-// Duplikasi isi baris (4 set) agar strip selalu menutupi layar
-// di posisi scroll mana pun (tanpa ruang kosong kiri/kanan).
+// Duplikasi isi baris via cloneNode (4 set) agar strip selalu
+// menutupi layar di posisi scroll mana pun.
 // ============================================================
 gsap.utils.toArray(".g-row").forEach((row) => {
-  row.innerHTML += row.innerHTML;
-  row.innerHTML += row.innerHTML;
+  const frag = document.createDocumentFragment();
+  for (let n = 0; n < 3; n++) {
+    Array.from(row.children).forEach((el) => frag.appendChild(el.cloneNode(true)));
+  }
+  row.appendChild(frag);
+  row.querySelectorAll("img").forEach((img) => {
+    img.decoding = "async";
+    img.loading = "lazy";
+  });
 });
 
 gsap.utils.toArray(".g-row").forEach((row, i) => {

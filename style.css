@@ -209,7 +209,7 @@ body {
   width: 26px;
   height: 29px;
   flex-shrink: 0;
-  background: url('asset/smawuk.png') center / cover no-repeat;
+  background: url('asset/web/smawuk.png') center / cover no-repeat;
   border-radius: 7px;
   box-shadow: 0 4px 8px -2px rgba(220, 60, 30, 0.3);
 }
@@ -906,6 +906,8 @@ body {
   padding: 90px 40px 0;
   position: relative;
   z-index: 5;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
 }
 .motto .team-head {
   margin-bottom: 44px;
@@ -1867,6 +1869,14 @@ body {
   width: 100%;
   border: none;
   background: #fff;
+}
+
+/* ============ PERFORMA: SKIP RENDER SECTION DI BAWAH LIPATAN ============ */
+.expand-gallery,
+.team-section,
+.footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
 }
 
 

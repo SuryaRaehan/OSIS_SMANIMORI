@@ -17,11 +17,11 @@
 
   window.FAN_CARDS = [
     {
-      imgUrl: "asset/ft brsm.png",
+      imgUrl: "asset/web/ft brsm.png",
       alt: "Pengurus OSIS 1"
     },
     {
-      imgUrl: "asset/ft brsm2.png",
+      imgUrl: "asset/web/ft brsm2.png",
       alt: "Pengurus OSIS 2"
     },
     {
