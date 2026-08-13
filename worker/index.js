@@ -1,4 +1,4 @@
-import { PPT_DB, DRIVE_DB } from "./db.js";
+﻿import { PPT_DB, DRIVE_DB } from "./db.js";
 
 const COOKIE_NAME = "_dbn";
 const TOKEN_TTL_MS = 5 * 60 * 1000;
@@ -57,23 +57,9 @@ function limited(key, limit, windowMs, now) {
   return false;
 }
 
-async function verifyTurnstile(secret, token, ip) {
-  if (!token) return false;
-  const fd = new FormData();
-  fd.append("secret", secret);
-  fd.append("response", token);
-  if (ip) fd.append("remoteip", ip);
-  try {
-    const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
-      method: "POST",
-      body: fd
-    });
-    const data = await res.json();
-    return data && data.success === true;
-  } catch {
-    return false;
-  }
-}
+
+
+
 
 function rawOrigin(request) {
   return (request.headers.get("Origin") || request.headers.get("Referer") || "").trim();
@@ -98,7 +84,7 @@ function corsFor(env, request) {
     "Access-Control-Allow-Origin": ok ? origin : "",
     "Access-Control-Allow-Credentials": "true",
     "Access-Control-Allow-Methods": "GET, OPTIONS",
-    "Access-Control-Allow-Headers": "content-type, x-db-token, x-turnstile-token",
+    "Access-Control-Allow-Headers": "content-type, x-db-token",
     "Vary": "Origin",
     "Cache-Control": "no-store",
     "X-Content-Type-Options": "nosniff"
@@ -120,19 +106,25 @@ function getCookie(request, name) {
 
 async function isAuthorized(request, env, ip, now) {
   if (!originAllowed(env, request)) return false;
-  const ts = request.headers.get("x-turnstile-token");
-  if (!(await verifyTurnstile(env.TURNSTILE_SECRET, ts, ip))) return false;
   const cookie = getCookie(request, COOKIE_NAME);
   const raw = request.headers.get("x-db-token");
   if (!cookie || !raw) return false;
   const dot = raw.lastIndexOf(".");
   if (dot < 1) return false;
-  const payload = raw.slice(0, dot);
+  const encoded = raw.slice(0, dot);
   const sig = raw.slice(dot + 1);
+  let payload;
+  try {
+    let b64 = encoded.replace(/-/g, "+").replace(/_/g, "/");
+    while (b64.length % 4) b64 += "=";
+    payload = atob(b64);
+  } catch {
+    return false;
+  }
   if (!(await verify(env.API_SECRET, payload, sig))) return false;
   let data;
   try {
-    data = JSON.parse(atob(payload.replace(/-/g, "+").replace(/_/g, "/")));
+    data = JSON.parse(payload);
   } catch {
     return false;
   }
