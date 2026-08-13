@@ -25,28 +25,23 @@
       alt: "Pengurus OSIS 2"
     },
     {
-      imgUrl:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=600&fit=crop&crop=faces&q=80",
+      imgUrl: "asset/web/ft brsm3.png",
       alt: "Pengurus OSIS 3"
     },
     {
-      imgUrl:
-        "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=600&fit=crop&crop=faces&q=80",
+      imgUrl: "asset/web/ft brsm4.png",
       alt: "Pengurus OSIS 4"
     },
     {
-      imgUrl:
-        "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=600&fit=crop&crop=faces&q=80",
+      imgUrl: "asset/web/ft brsm5.png",
       alt: "Pengurus OSIS 5"
     },
     {
-      imgUrl:
-        "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=400&h=600&fit=crop&crop=faces&q=80",
+      imgUrl: "asset/web/ft brsm6.png",
       alt: "Pengurus OSIS 6"
     },
     {
-      imgUrl:
-        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=600&fit=crop&crop=faces&q=80",
+      imgUrl: "asset/web/ft brsm7.png",
       alt: "Pengurus OSIS 7"
     },
     {
