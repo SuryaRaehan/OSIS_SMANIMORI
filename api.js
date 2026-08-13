@@ -6,9 +6,33 @@
     CF_CONFIG.workerUrl.indexOf("YOUR-WORKER") === -1 &&
     CF_CONFIG.turnstileSiteKey.indexOf("...") === -1;
 
-  // --- Turnstile: satu widget tersembunyi, pre-solve, cache token ---
+  // --- Turnstile: satu widget (fallback interaksi), pre-solve, cache token ---
   var TURNSTILE_TTL = 240000;
-  var tsState = { token: null, at: 0, pending: null };
+  var tsState = { token: null, at: 0, waiters: [] };
+  var widgetId = null;
+  var hostEl = null;
+
+  function ensureHost() {
+    if (!hostEl) {
+      hostEl = document.createElement("div");
+      hostEl.id = "cf-widget-host";
+      hostEl.style.cssText = "position:fixed;bottom:16px;right:16px;z-index:2147483647;";
+      document.body.appendChild(hostEl);
+    }
+    return hostEl;
+  }
+
+  function settleTurnstile(token) {
+    if (token) {
+      tsState.token = token;
+      tsState.at = Date.now();
+    } else {
+      tsState.token = null;
+    }
+    var ws = tsState.waiters;
+    tsState.waiters = [];
+    ws.forEach(function (r) { r(token || null); });
+  }
 
   function turnstileReady() {
     return new Promise(function (resolve) {
@@ -27,44 +51,34 @@
     });
   }
 
+  function ensureSolving() {
+    turnstileReady().then(function (turnstile) {
+      if (!turnstile) return settleTurnstile(null);
+      if (widgetId == null) {
+        widgetId = turnstile.render(ensureHost(), {
+          sitekey: CF_CONFIG.turnstileSiteKey,
+          appearance: "interaction-only",
+          execution: "render",
+          callback: function (t) { settleTurnstile(t); },
+          "error-callback": function () { settleTurnstile(null); },
+          "timeout-callback": function () { settleTurnstile(null); },
+          "expired-callback": function () { tsState.token = null; }
+        });
+      } else {
+        try { turnstile.reset(widgetId); } catch (e) {}
+      }
+    });
+  }
+
   function solveTurnstile() {
     if (tsState.token && Date.now() - tsState.at < TURNSTILE_TTL) {
       return Promise.resolve(tsState.token);
     }
-    if (tsState.pending) return tsState.pending;
-    tsState.pending = new Promise(function (resolve) {
-      turnstileReady().then(function (turnstile) {
-        if (!turnstile) return resolve(null);
-        var host = document.createElement("div");
-        host.id = "cf-widget-host";
-        host.style.cssText =
-          "position:fixed;left:-9999px;top:0;width:0;height:0;visibility:hidden;";
-        document.body.appendChild(host);
-        turnstile.render(host, {
-          sitekey: CF_CONFIG.turnstileSiteKey,
-          appearance: "execute",
-          execution: "render",
-          callback: function (t) {
-            tsState.token = t;
-            tsState.at = Date.now();
-            tsState.pending = null;
-            resolve(t);
-          },
-          "error-callback": function () {
-            tsState.pending = null;
-            resolve(null);
-          },
-          "timeout-callback": function () {
-            tsState.pending = null;
-            resolve(null);
-          },
-          "expired-callback": function () {
-            tsState.token = null;
-          }
-        });
-      });
+    var p = new Promise(function (resolve) {
+      tsState.waiters.push(resolve);
     });
-    return tsState.pending;
+    ensureSolving();
+    return p;
   }
 
   // --- Sesi challenge: cache token + cookie selama 4 menit ---
