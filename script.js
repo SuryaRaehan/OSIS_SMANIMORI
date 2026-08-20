@@ -54,11 +54,14 @@ gsap.to(".small-team", {
   ease: "none",
   scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.8 }
 });
-gsap.to("#subline", {
-  opacity: 0,
-  ease: "none",
-  scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.8 }
-});
+gsap.fromTo("#subline",
+  { opacity: 1 },
+  {
+    opacity: 0,
+    ease: "none",
+    scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.8 }
+  }
+);
 gsap.to(".fan-carousel", {
   y: 80,
   opacity: 0,

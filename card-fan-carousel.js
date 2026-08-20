@@ -45,8 +45,7 @@
       alt: "Pengurus OSIS 7"
     },
     {
-      imgUrl:
-        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=600&fit=crop&crop=faces&q=80",
+      imgUrl: "asset/web/ft brsm8.png",
       alt: "Pengurus OSIS 8"
     }
   ];
