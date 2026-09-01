@@ -927,21 +927,13 @@ body.splash-lock {
   gap: 10px;
 }
 .sie-member {
-  position: relative;
   display: flex;
   flex-direction: column;
-  padding: 0;
-  background: linear-gradient(
-    180deg,
-    var(--orange-1) 0%,
-    var(--orange-2) 35%,
-    var(--orange-3) 70%,
-    var(--orange-4) 100%
-  );
+  background: var(--ink);
   border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 14px 24px -12px rgba(180, 50, 20, 0.35),
-    0 6px 14px -6px rgba(140, 40, 10, 0.22);
+  box-shadow: 0 14px 24px -12px rgba(20, 8, 0, 0.4),
+    0 6px 14px -6px rgba(20, 8, 0, 0.22);
 }
 .sie-member img {
   width: 100%;
@@ -951,18 +943,9 @@ body.splash-lock {
   display: block;
 }
 .sie-member span {
-  position: absolute;
-  left: 6px;
-  right: 6px;
-  bottom: 6px;
-  padding: 8px 8px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(20, 10, 6, 0.72);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  padding: 9px 8px 10px;
   font-size: 11.5px;
-  color: #fafaf7;
+  color: #f4edde;
   font-weight: 700;
   text-align: center;
   line-height: 1.25;

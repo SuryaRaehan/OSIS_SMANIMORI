@@ -194,12 +194,8 @@
     border-radius: 10px;
   }
   .sie-member span {
-    left: 4px;
-    right: 4px;
-    bottom: 4px;
-    padding: 6px 4px;
+    padding: 7px 4px 8px;
     font-size: 10px;
-    border-radius: 8px;
   }
 }
 
