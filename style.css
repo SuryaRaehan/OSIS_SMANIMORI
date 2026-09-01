@@ -357,6 +357,72 @@ body.splash-lock {
   gap: 10px;
 }
 
+/* ============ DROPDOWN "YUK JOIN" ============ */
+.nav-cta-wrap {
+  position: relative;
+}
+.nav-cta-wrap .nav-cta {
+  white-space: nowrap;
+}
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px;
+  background: var(--ink);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 18px;
+  box-shadow: 0 24px 48px -16px rgba(20, 8, 0, 0.5),
+    0 8px 20px -8px rgba(20, 8, 0, 0.35);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.28s ease, transform 0.28s ease, visibility 0.28s;
+  z-index: 70;
+}
+.nav-dropdown.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.nav-dropdown a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 14px;
+  border-radius: 12px;
+  color: #faf5ea;
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.nav-dropdown a svg {
+  flex: none;
+  opacity: 0.7;
+}
+.nav-dropdown a:hover {
+  background: var(--orange-1);
+  color: #fff;
+}
+.nav-dropdown a.active {
+  background: rgba(255, 255, 255, 0.12);
+}
+.nav-dropdown a.active:hover {
+  background: var(--orange-1);
+}
+
+/* Item "Daftar/Pengumuman" di menu mobile — disembunyikan di desktop */
+.nav-join-mob {
+  display: none;
+}
+
 /* ============ EDGE FADE: GRADASI MEMUDAR DI TEPI ATAS ============
    Muncul hanya saat elemen mendekati navbar (opacity diatur JS
    sesuai scroll). Warna mengikuti latar body agar menyatu. */
@@ -1409,6 +1475,248 @@ body.splash-lock {
   border-radius: 22px;
   background: #fff;
   display: block;
+}
+
+/* ============ HALAMAN PENGUMUMAN / CEK KELULUSAN ============ */
+.cek-card {
+  max-width: 620px;
+  margin: 0 auto;
+  background: var(--ink);
+  border-radius: 28px;
+  padding: 26px;
+  box-shadow: 0 40px 80px -30px rgba(20, 8, 0, 0.45),
+    0 16px 32px -12px rgba(20, 8, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.cek-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.cek-label {
+  color: #faf5ea;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.cek-input {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 14px 16px;
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  text-transform: uppercase;
+}
+.cek-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 500;
+  text-transform: none;
+}
+.cek-input:focus {
+  border-color: var(--orange-3);
+  background: rgba(255, 255, 255, 0.09);
+}
+.cek-input.shake {
+  animation: cek-shake 0.5s ease;
+}
+.cek-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, var(--orange-1), var(--orange-2));
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 14px 18px;
+  font-family: inherit;
+  font-size: 14.5px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 14px 26px -12px rgba(217, 53, 31, 0.7);
+  transition: transform 0.3s cubic-bezier(0.6, 0, 0.2, 1), box-shadow 0.3s ease;
+}
+.cek-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 32px -12px rgba(217, 53, 31, 0.85);
+}
+
+@keyframes cek-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+/* ============ MODAL HASIL KELULUSAN ============ */
+.hasil-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s;
+}
+.hasil-modal.open {
+  opacity: 1;
+  visibility: visible;
+}
+.hasil-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 8, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.hasil-card {
+  position: relative;
+  z-index: 2;
+  max-width: 460px;
+  width: 100%;
+  padding: 44px 34px 38px;
+  border-radius: 28px;
+  text-align: center;
+  background: #fff;
+  box-shadow: 0 60px 120px -40px rgba(0, 0, 0, 0.7);
+  transform: translateY(24px) scale(0.96);
+  transition: transform 0.35s cubic-bezier(0.34, 1.4, 0.4, 1);
+}
+.hasil-modal.open .hasil-card {
+  transform: translateY(0) scale(1);
+}
+.hasil-card.lulus {
+  background: linear-gradient(
+    160deg,
+    #ffffff 0%,
+    #fff9ee 55%,
+    #fdeecd 100%
+  );
+  border: 1px solid rgba(217, 53, 31, 0.25);
+}
+.hasil-card.tidak {
+  background: linear-gradient(160deg, #ffffff 0%, #f1f0ec 60%, #e4e2dc 100%);
+  border: 1px solid rgba(43, 43, 48, 0.18);
+}
+.hasil-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(20, 8, 0, 0.06);
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.2s ease;
+}
+.hasil-close:hover {
+  transform: rotate(90deg);
+  background: rgba(20, 8, 0, 0.12);
+}
+.hasil-tag {
+  display: inline-block;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.hasil-card.lulus .hasil-tag {
+  background: linear-gradient(135deg, var(--orange-1), var(--orange-2));
+  color: #fff;
+  box-shadow: 0 10px 22px -10px rgba(217, 53, 31, 0.8);
+}
+.hasil-card.tidak .hasil-tag {
+  background: #141416;
+  color: #faf5ea;
+}
+.hasil-title {
+  margin-top: 18px;
+  font-size: clamp(24px, 3.4vw, 34px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+.hasil-card.tidak .hasil-title {
+  color: var(--ink-soft);
+}
+.hasil-sub {
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--mute);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.hasil-name {
+  margin-top: 20px;
+  padding: 16px 14px;
+  border-radius: 14px;
+  background: rgba(20, 8, 0, 0.05);
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  overflow-wrap: break-word;
+}
+.hasil-card.lulus .hasil-name {
+  background: linear-gradient(135deg, rgba(217, 53, 31, 0.1), rgba(245, 139, 78, 0.16));
+}
+.hasil-note {
+  margin-top: 18px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+/* Confetti */
+.confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+.confetti i {
+  position: absolute;
+  top: -12px;
+  width: 10px;
+  height: 16px;
+  border-radius: 2px;
+  opacity: 0;
+  animation: confetti-fall linear forwards;
+}
+.hasil-modal.open.lulus .confetti i {
+  opacity: 1;
+}
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-12px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0.6;
+  }
 }
 
 /* ============ FOOTER / SOSMED ============ */

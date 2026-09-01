@@ -283,6 +283,43 @@ if (navToggle && navLinks) {
 }
 
 // ============================================================
+// DROPDOWN "YUK JOIN" (desktop)
+// ============================================================
+const joinBtn = document.getElementById("joinBtn");
+const joinDropdown = document.getElementById("joinDropdown");
+if (joinBtn && joinDropdown) {
+  const isMobile = () => window.matchMedia("(max-width: 767.98px)").matches;
+  joinBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (isMobile()) {
+      if (navLinks) {
+        const open = navLinks.classList.toggle("open");
+        navToggle.classList.toggle("open", open);
+        navToggle.setAttribute("aria-expanded", String(open));
+      }
+      return;
+    }
+    const open = joinDropdown.classList.toggle("open");
+    joinBtn.setAttribute("aria-expanded", String(open));
+  });
+  joinBtn.addEventListener("mouseenter", () => {
+    if (isMobile()) return;
+    joinDropdown.classList.add("open");
+    joinBtn.setAttribute("aria-expanded", "true");
+  });
+  joinDropdown.addEventListener("mouseleave", () => {
+    joinDropdown.classList.remove("open");
+    joinBtn.setAttribute("aria-expanded", "false");
+  });
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".nav-cta-wrap")) {
+      joinDropdown.classList.remove("open");
+      joinBtn.setAttribute("aria-expanded", "false");
+    }
+  });
+}
+
+// ============================================================
 // CTA / BUTTON CLICKS
 // ============================================================
 document.querySelectorAll(".nav-cta, .arrow-pill").forEach((btn) => {

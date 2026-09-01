@@ -29,15 +29,37 @@
       <li><a href="index.html#struktur">Struktur</a></li>
       <li><a href="index.html#galeri">Galeri</a></li>
       <li><a href="index.html#sosmed">Sosmed</a></li>
+      <li class="nav-join-mob"><a href="daftar.html" class="active">Daftar Sekarang</a></li>
+      <li class="nav-join-mob"><a href="pengumuman.html">Pengumuman</a></li>
     </ul>
     <div class="nav-right">
-      <a class="nav-cta" href="daftar.html">
-        Yuk Join
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-          <line x1="7" y1="17" x2="17" y2="7" />
-          <polyline points="7 7 17 7 17 17" />
-        </svg>
-      </a>
+      <div class="nav-cta-wrap">
+        <button type="button" class="nav-cta" id="joinBtn" aria-haspopup="true" aria-expanded="false">
+          Yuk Join
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <line x1="7" y1="17" x2="17" y2="7" />
+            <polyline points="7 7 17 7 17 17" />
+          </svg>
+        </button>
+        <div class="nav-dropdown" id="joinDropdown">
+          <a href="daftar.html" class="active">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="8" y1="13" x2="16" y2="13" />
+              <line x1="8" y1="17" x2="13" y2="17" />
+            </svg>
+            Daftar Sekarang
+          </a>
+          <a href="pengumuman.html">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 4H2v16h20z" />
+              <line x1="2" y1="10" x2="22" y2="10" />
+            </svg>
+            Pengumuman
+          </a>
+        </div>
+      </div>
       <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">
         <span></span>
         <span></span>
@@ -97,6 +119,41 @@
           toggle.classList.remove("open");
         })
       );
+    }
+
+    // Dropdown desktop
+    const joinBtn = document.getElementById("joinBtn");
+    const joinDropdown = document.getElementById("joinDropdown");
+    if (joinBtn && joinDropdown) {
+      const isMobile = () => window.matchMedia("(max-width: 767.98px)").matches;
+      joinBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (isMobile()) {
+          if (links) {
+            const open = links.classList.toggle("open");
+            toggle.classList.toggle("open", open);
+            toggle.setAttribute("aria-expanded", String(open));
+          }
+          return;
+        }
+        const open = joinDropdown.classList.toggle("open");
+        joinBtn.setAttribute("aria-expanded", String(open));
+      });
+      joinBtn.addEventListener("mouseenter", () => {
+        if (isMobile()) return;
+        joinDropdown.classList.add("open");
+        joinBtn.setAttribute("aria-expanded", "true");
+      });
+      joinDropdown.addEventListener("mouseleave", () => {
+        joinDropdown.classList.remove("open");
+        joinBtn.setAttribute("aria-expanded", "false");
+      });
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".nav-cta-wrap")) {
+          joinDropdown.classList.remove("open");
+          joinBtn.setAttribute("aria-expanded", "false");
+        }
+      });
     }
   </script>
 </body>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pengumuman Kelulusan | OSIS SMAN 1 Imogiri</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..900;1,9..40,400..900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="mobile.css" media="(max-width: 767.98px)" />
+</head>
+<body>
+  <div class="grain"></div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <a class="logo" href="index.html" style="text-decoration: none; color: inherit;">
+      <span class="logo-dot"></span>
+      <span class="logo-text">
+        <span class="logo-pill"></span>
+        smanimori
+      </span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li class="nav-pill" aria-hidden="true"></li>
+      <li><a href="index.html#beranda">Beranda</a></li>
+      <li><a href="index.html#motto">Motto</a></li>
+      <li><a href="index.html#struktur">Struktur</a></li>
+      <li><a href="index.html#galeri">Galeri</a></li>
+      <li><a href="index.html#sosmed">Sosmed</a></li>
+      <li class="nav-join-mob"><a href="daftar.html">Daftar Sekarang</a></li>
+      <li class="nav-join-mob"><a href="pengumuman.html" class="active">Pengumuman</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-cta-wrap">
+        <button type="button" class="nav-cta" id="joinBtn" aria-haspopup="true" aria-expanded="false">
+          Yuk Join
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <line x1="7" y1="17" x2="17" y2="7" />
+            <polyline points="7 7 17 7 17 17" />
+          </svg>
+        </button>
+        <div class="nav-dropdown" id="joinDropdown">
+          <a href="daftar.html">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="8" y1="13" x2="16" y2="13" />
+              <line x1="8" y1="17" x2="13" y2="17" />
+            </svg>
+            Daftar Sekarang
+          </a>
+          <a href="pengumuman.html" class="active">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 4H2v16h20z" />
+              <line x1="2" y1="10" x2="22" y2="10" />
+            </svg>
+            Pengumuman
+          </a>
+        </div>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ============ PENGUMUMAN / CEK KELULUSAN ============ -->
+    <section class="daftar pengumuman" id="pengumuman">
+      <div class="daftar-head">
+        <div class="eyebrow">Pengumuman · Hasil Seleksi</div>
+        <h1>Pengumuman Hasil <em>Seleksi Pengurus</em></h1>
+        <p>Ketik namamu di bawah untuk melihat hasil seleksi pengurus OSIS. Masukkan nama sesuai yang kamu daftarkan saat mengisi formulir pendaftaran.</p>
+      </div>
+
+      <div class="cek-card">
+        <div class="cek-field">
+          <label class="cek-label" for="namaInput">Nama Lengkap</label>
+          <input
+            id="namaInput"
+            class="cek-input"
+            type="text"
+            placeholder="contoh: SURYA RAEHAN ARYUDI"
+            autocomplete="off"
+            spellcheck="false"
+          />
+        </div>
+        <button class="cek-btn" id="cekBtn" type="button">
+          Cek Hasil
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer" id="sosmed">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo-dot"></span>
+        <span>OSIS SMAN 1 Imogiri</span>
+      </div>
+      <p class="footer-tag">Kepengurusan 2025/2026 - Raih Prestasi, Satukan Potensi, Suarakan Aspirasi.</p>
+      <div class="footer-sosmed">
+        <a href="https://www.instagram.com/osis_sman1imogiri?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener">Instagram</a>
+        <a href="#" target="_blank" rel="noopener">TikTok</a>
+        <a href="#" target="_blank" rel="noopener">YouTube</a>
+        <a href="mailto:osis@sman1imogiri.sch.id">Email</a>
+      </div>
+      <p class="footer-credit">&copy; 2026 OSIS SMAN 1 Imogiri. Dibuat oleh pengurus.</p>
+    </div>
+  </footer>
+
+  <!-- ============ MODAL HASIL ============ -->
+  <div class="hasil-modal" id="hasilModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Hasil seleksi">
+    <div class="hasil-backdrop" data-hasil-close></div>
+    <div class="hasil-card" id="hasilCard">
+      <button class="hasil-close" type="button" data-hasil-close aria-label="Tutup">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <line x1="6" y1="6" x2="18" y2="18" />
+          <line x1="18" y1="6" x2="6" y2="18" />
+        </svg>
+      </button>
+      <div class="hasil-tag" id="hasilTag">LOLOS</div>
+      <h2 class="hasil-title" id="hasilTitle">Selamat!</h2>
+      <p class="hasil-sub" id="hasilSub"></p>
+      <div class="hasil-name" id="hasilName"></div>
+      <p class="hasil-note" id="hasilNote"></p>
+    </div>
+    <div class="confetti" id="confetti" aria-hidden="true"></div>
+  </div>
+
+  <script src="pengumuman-data.js"></script>
+  <script>
+    const toggle = document.getElementById("navToggle");
+    const links = document.getElementById("navLinks");
+    if (toggle && links) {
+      toggle.addEventListener("click", () => {
+        const open = links.classList.toggle("open");
+        toggle.classList.toggle("open", open);
+        toggle.setAttribute("aria-expanded", String(open));
+      });
+      links.querySelectorAll("a").forEach((a) =>
+        a.addEventListener("click", () => {
+          links.classList.remove("open");
+          toggle.classList.remove("open");
+        })
+      );
+    }
+
+    // Dropdown desktop
+    const joinBtn = document.getElementById("joinBtn");
+    const joinDropdown = document.getElementById("joinDropdown");
+    if (joinBtn && joinDropdown) {
+      const isMobile = () => window.matchMedia("(max-width: 767.98px)").matches;
+      joinBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (isMobile()) {
+          if (links) {
+            const open = links.classList.toggle("open");
+            toggle.classList.toggle("open", open);
+            toggle.setAttribute("aria-expanded", String(open));
+          }
+          return;
+        }
+        const open = joinDropdown.classList.toggle("open");
+        joinBtn.setAttribute("aria-expanded", String(open));
+      });
+      joinBtn.addEventListener("mouseenter", () => {
+        if (isMobile()) return;
+        joinDropdown.classList.add("open");
+        joinBtn.setAttribute("aria-expanded", "true");
+      });
+      joinDropdown.addEventListener("mouseleave", () => {
+        joinDropdown.classList.remove("open");
+        joinBtn.setAttribute("aria-expanded", "false");
+      });
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".nav-cta-wrap")) {
+          joinDropdown.classList.remove("open");
+          joinBtn.setAttribute("aria-expanded", "false");
+        }
+      });
+    }
+
+    // ============ CEK KELULUSAN ============
+    var namaInput = document.getElementById("namaInput");
+    var cekBtn = document.getElementById("cekBtn");
+    var hasilModal = document.getElementById("hasilModal");
+    var hasilCard = document.getElementById("hasilCard");
+    var confetti = document.getElementById("confetti");
+
+    function normalize(s) {
+      return String(s || "").trim().toLowerCase().replace(/\s+/g, " ");
+    }
+
+    function openModal(lulus, name) {
+      hasilModal.classList.remove("lulus", "tidak");
+      hasilModal.classList.add(lulus ? "lulus" : "tidak");
+      hasilCard.classList.remove("lulus", "tidak");
+      hasilCard.classList.add(lulus ? "lulus" : "tidak");
+      document.getElementById("hasilTag").textContent = lulus ? "LOLOS" : "TIDAK LOLOS";
+      document.getElementById("hasilTitle").textContent = lulus ? "Selamat, Kamu Lolos!" : "Mohon Maaf";
+      document.getElementById("hasilName").textContent = name;
+      document.getElementById("hasilSub").textContent = lulus
+        ? "Pengumuman Hasil Seleksi Pengurus OSIS"
+        : "Hasil Seleksi Pengurus OSIS";
+      document.getElementById("hasilNote").textContent = lulus
+        ? "Kamu dinyatakan LOLOS menjadi Pengurus OSIS SMAN 1 Imogiri. Siapkan dirimu untuk pembekalan dan rapat perdana. Selamat bergabung, calon pengurus baru!"
+        : "Kamu belum lolos seleksi pengurus OSIS periode ini. Jangan menyerah — jadikan ini semangat untuk terus berkembang dan mencoba kembali.";
+
+      hasilModal.classList.add("open");
+      hasilModal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+
+      if (lulus) spawnConfetti();
+    }
+
+    function closeModal() {
+      hasilModal.classList.remove("open");
+      hasilModal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      confetti.innerHTML = "";
+    }
+
+    function spawnConfetti() {
+      confetti.innerHTML = "";
+      var colors = ["#fdc68a", "#e85a2b", "#d9351f", "#f5efe2", "#14b078"];
+      for (var i = 0; i < 60; i++) {
+        var piece = document.createElement("i");
+        piece.style.left = Math.random() * 100 + "%";
+        piece.style.background = colors[i % colors.length];
+        piece.style.animationDelay = Math.random() * 0.8 + "s";
+        piece.style.animationDuration = (2.4 + Math.random() * 1.8) + "s";
+        confetti.appendChild(piece);
+      }
+    }
+
+    function cekNama() {
+      var name = namaInput.value;
+      if (!normalize(name)) {
+        namaInput.focus();
+        namaInput.placeholder = "Silakan ketik namamu dulu";
+        namaInput.classList.add("shake");
+        setTimeout(() => namaInput.classList.remove("shake"), 500);
+        return;
+      }
+      var found = (window.PENGUMUMAN || []).some(function (n) {
+        return normalize(n) === normalize(name);
+      });
+      openModal(found, name.trim());
+    }
+
+    cekBtn.addEventListener("click", cekNama);
+    namaInput.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") cekNama();
+    });
+    document.querySelectorAll("[data-hasil-close]").forEach(function (el) {
+      el.addEventListener("click", closeModal);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeModal();
+    });
+  </script>
+</body>
+</html>

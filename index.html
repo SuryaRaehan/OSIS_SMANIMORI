@@ -52,15 +52,37 @@
       <li><a href="#struktur">Struktur</a></li>
       <li><a href="#galeri">Galeri</a></li>
       <li><a href="#sosmed">Sosmed</a></li>
+      <li class="nav-join-mob"><a href="daftar.html">Daftar Sekarang</a></li>
+      <li class="nav-join-mob"><a href="pengumuman.html">Pengumuman</a></li>
     </ul>
     <div class="nav-right">
-      <a class="nav-cta" href="daftar.html">
-        Yuk Join
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-          <line x1="7" y1="17" x2="17" y2="7" />
-          <polyline points="7 7 17 7 17 17" />
-        </svg>
-      </a>
+      <div class="nav-cta-wrap">
+        <button type="button" class="nav-cta" id="joinBtn" aria-haspopup="true" aria-expanded="false">
+          Yuk Join
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <line x1="7" y1="17" x2="17" y2="7" />
+            <polyline points="7 7 17 7 17 17" />
+          </svg>
+        </button>
+        <div class="nav-dropdown" id="joinDropdown">
+          <a href="daftar.html">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="8" y1="13" x2="16" y2="13" />
+              <line x1="8" y1="17" x2="13" y2="17" />
+            </svg>
+            Daftar Sekarang
+          </a>
+          <a href="pengumuman.html">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 4H2v16h20z" />
+              <line x1="2" y1="10" x2="22" y2="10" />
+            </svg>
+            Pengumuman
+          </a>
+        </div>
+      </div>
       <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">
         <span></span>
         <span></span>
