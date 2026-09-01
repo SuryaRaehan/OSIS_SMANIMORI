@@ -186,16 +186,20 @@
     border-radius: 9px;
   }
   .sie-body-inner {
-    padding: 4px 12px 14px;
+    padding: 4px 10px 14px;
     gap: 8px;
+    grid-template-columns: repeat(3, 1fr);
   }
   .sie-member {
-    padding: 8px 9px;
     border-radius: 10px;
   }
-  .sie-member img {
-    width: 32px;
-    height: 32px;
+  .sie-member span {
+    left: 4px;
+    right: 4px;
+    bottom: 4px;
+    padding: 6px 4px;
+    font-size: 10px;
+    border-radius: 8px;
   }
 }
 
