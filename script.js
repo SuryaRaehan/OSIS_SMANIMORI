@@ -10,9 +10,9 @@ gsap.set("#subline", { opacity: 0, y: 20 });
 gsap.set(".stats-table-wrap", { opacity: 0, y: 40 });
 
 // ============================================================
-// INTRO TIMELINE
+// INTRO TIMELINE (diputar setelah splash screen selesai)
 // ============================================================
-const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
+const intro = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
 intro
   .to("#nav", { opacity: 1, y: 0, duration: 0.8 }, 0.1)
   .to(
@@ -37,6 +37,15 @@ intro
     0.55
   )
   .to("#subline", { opacity: 1, y: 0, duration: 0.8 }, 1.6);
+
+function playIntro() {
+  intro.play();
+}
+if (window.__SPLASH_DONE) playIntro();
+else window.addEventListener("SplashDone", playIntro);
+setTimeout(function () {
+  if (intro.progress() === 0) playIntro();
+}, 6000);
 
 // ============================================================
 // SCROLL: "big results" SCALES UP

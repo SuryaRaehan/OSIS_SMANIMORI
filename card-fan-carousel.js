@@ -465,8 +465,12 @@
   }
 
   ready(function () {
-    document.querySelectorAll(".fan-carousel").forEach(function (root) {
-      initFanCarousel(root, window.FAN_CARDS || []);
-    });
+    function boot() {
+      document.querySelectorAll(".fan-carousel").forEach(function (root) {
+        initFanCarousel(root, window.FAN_CARDS || []);
+      });
+    }
+    if (window.__SPLASH_DONE) boot();
+    else window.addEventListener("SplashDone", boot);
   });
 })();
