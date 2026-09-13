@@ -370,10 +370,7 @@ const openPopup = () => {
   videoPopup.classList.add("open");
   videoPopup.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
-  const play = popupVideo.play();
-  if (play !== undefined) {
-    play.catch(() => {});
-  }
+  popupVideo.src = popupVideo.dataset.videoSrc + "?autoplay=1";
 };
 
 const closePopup = () => {
@@ -381,7 +378,7 @@ const closePopup = () => {
   videoPopup.classList.remove("open");
   videoPopup.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
-  popupVideo.pause();
+  popupVideo.src = "";
 };
 
 document.querySelector(".subline .arrow-pill").addEventListener("click", openPopup);
