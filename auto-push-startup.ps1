@@ -1,11 +1,13 @@
-# auto-push-startup.ps1 - Daftarkan Auto-Push saat Windows login
+# auto-push-startup.ps1 - Aktifkan Auto-Push saat Windows login (tanpa admin)
 $ErrorActionPreference = "Stop"
 
+$startupDir = Join-Path ([Environment]::GetFolderPath("Startup")) ""
+$startupFile = Join-Path $startupDir "AutoPush.cmd"
 $scriptPath = Join-Path $PSScriptRoot "auto-push.ps1"
-$action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File `"$scriptPath`""
-$trigger = New-ScheduledTaskTrigger -AtLogOn
-$settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -ExecutionTimeLimit ([TimeSpan]::Zero)
 
-Register-ScheduledTask -TaskName "AutoPush" -Action $action -Trigger $trigger -Settings $settings -Description "Auto commit & push setiap perubahan file ke GitHub" -Force
+$content = "@echo off`r`npowershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File `"$scriptPath`""
 
-Write-Host "Auto-Push terdaftar di Task Scheduler. Akan berjalan otomatis setiap kali Windows login." -ForegroundColor Green
+Set-Content -LiteralPath $startupFile -Value $content -Encoding Ascii
+
+Write-Host "Auto-Push aktif. Akan berjalan otomatis setiap Windows login." -ForegroundColor Green
+Write-Host "Lokasi launcher: $startupFile"
