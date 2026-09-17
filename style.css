@@ -1369,16 +1369,16 @@ body.splash-lock {
   font-variant-numeric: tabular-nums;
 }
 
-/* ============ SECTION 3: GALERI (SCROLL BERSILANGAN) ============ */
+/* ============ SECTION 3: GALERI (AUTO-SCROLL SEAMLESS) ============ */
 .gallery {
   height: 100vh;
   position: relative;
   z-index: 5;
 }
 .gallery-wrap {
-  position: sticky;
+  position: relative;
   top: 0;
-  height: 90vh;
+  height: 100%;
   overflow: hidden;
   display: flex;
   flex-direction: column;

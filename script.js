@@ -235,45 +235,86 @@ ScrollTrigger.create({
 });
 
 // ============================================================
-// GALERI: SCROLL VERTIKAL -> GULIR HORIZONTAL BERSILANGAN
-// Duplikasi isi baris via cloneNode (4 set) agar strip selalu
-// menutupi layar di posisi scroll mana pun.
+// GALERI: AUTO-SCROLL SEAMLESS (MARQUEE)
+// Baris diduplikasi 4 set agar strip selalu menutupi layar.
+// Pita (periode satu set) diukur langsung dari DOM, lalu row
+// digeser sebesar satu pita dengan GSAP repeat -1 -> foto terus
+// menyambung tanpa jeda, bergerak sendiri dengan halus tanpa
+// bergantung scroll.
 // ============================================================
-gsap.utils.toArray(".g-row").forEach((row) => {
-  const frag = document.createDocumentFragment();
-  for (let n = 0; n < 3; n++) {
-    Array.from(row.children).forEach((el) => frag.appendChild(el.cloneNode(true)));
-  }
-  row.appendChild(frag);
-  row.querySelectorAll("img").forEach((img) => {
-    img.decoding = "async";
-    img.loading = "lazy";
-  });
-});
-
-if (window.matchMedia("(min-width: 768px)").matches) {
-  // Baris 1 & 3 bergerak ke kiri (0 -> -50%).
-  // Baris tengah bergerak ke kanan (-50% -> 0) dengan konten sudah
-  // digeser ke kiri terlebih dahulu, sehingga strip selalu menutupi
-  // layar dan tidak pernah "mentok" atau hilang saat di-scroll.
-  const starts = [0, -50, 0];
-  const ends = [-50, 0, -50];
+function setupGalleryMarquee() {
   const rows = gsap.utils.toArray(".g-row");
+  if (!rows.length) return;
 
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".gallery",
-      start: "top top",
-      end: "bottom bottom",
-      scrub: 1.4,
-      pin: true,
-      anticipatePin: 1
+  rows.forEach((row) => {
+    // 4 set konten identik (kloning 3x dari 1 set asli)
+    row.querySelectorAll("img").forEach((img) => {
+      img.decoding = "async";
+      img.loading = "lazy";
+    });
+  });
+
+  // Bersihkan tween lama & kembalikan posisi awal agar aman saat resize
+  rows.forEach((row) => {
+    gsap.killTweensOf(row);
+    gsap.set(row, { clearProps: "x" });
+  });
+
+  // Cek preferensi aksesibilitas: matikan gerak jika user minta
+  const reduce =
+    window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce) return;
+
+  const durs = [28, 34, 22];
+  rows.forEach((row, i) => {
+    const children = row.children;
+    const count = children.length;
+    if (count < 2) return;
+
+    // Pita = jarak antara item pertama set-1 dan item pertama set-2
+    const quarter = Math.round(count / 4);
+    const period = Math.round(children[quarter].offsetLeft - children[0].offsetLeft);
+    if (!period) return;
+
+    if (i % 2 === 0) {
+      // Baris 1 & 3: bergerak ke kiri (0 -> -period)
+      gsap.fromTo(
+        row,
+        { x: 0 },
+        { x: -period, duration: durs[i % durs.length], ease: "none", repeat: -1 }
+      );
+    } else {
+      // Baris 2: bergerak ke kanan (-period -> 0)
+      gsap.fromTo(
+        row,
+        { x: -period },
+        { x: 0, duration: durs[i % durs.length], ease: "none", repeat: -1 }
+      );
     }
   });
-  rows.forEach((row, i) => {
-    tl.add(gsap.fromTo(row, { xPercent: starts[i] }, { xPercent: ends[i], ease: "none" }), 0);
-  });
 }
+
+(function initGallery() {
+  const rows = gsap.utils.toArray(".g-row");
+
+  // Duplikasi tiap baris: setiap set awal (10 foto) jadi 4 set total.
+  rows.forEach((row) => {
+    const set = Array.from(row.children).map((el) => el.cloneNode(true));
+    for (let n = 0; n < 3; n++) {
+      const frag = document.createDocumentFragment();
+      set.forEach((el) => frag.appendChild(el.cloneNode(true)));
+      row.appendChild(frag);
+    }
+  });
+
+  setupGalleryMarquee();
+
+  let rT;
+  window.addEventListener("resize", () => {
+    clearTimeout(rT);
+    rT = setTimeout(setupGalleryMarquee, 200);
+  });
+})();
 
 // ============================================================
 // MOBILE NAV TOGGLE
