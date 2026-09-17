@@ -268,7 +268,7 @@ gsap.utils.toArray(".g-row").forEach((row, i) => {
         trigger: ".gallery",
         start: "top top",
         end: "bottom bottom",
-        scrub: 1.1
+        scrub: 1.4
       }
     }
   );
