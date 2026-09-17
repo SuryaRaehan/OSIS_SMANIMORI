@@ -168,15 +168,30 @@ body.splash-lock {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(
-    120% 70% at 50% 0%,
-    #f8f3e7 0%,
-    #f2ead6 60%,
-    #e9dec3 100%
-  );
-  transition:
-    opacity 0.6s ease,
-    visibility 0.6s ease;
+  background: radial-gradient(ellipse at 50% 120%, #1a1a2e 0%, #0d0d1a 40%, #050510 100%);
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+/* Starfield */
+.splash::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 25% 35%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1.5px 1.5px at 40% 10%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 55% 55%, rgba(255,255,255,0.25), transparent),
+    radial-gradient(1px 1px at 70% 25%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1.5px 1.5px at 85% 60%, rgba(255,255,255,0.35), transparent),
+    radial-gradient(1px 1px at 15% 80%, rgba(255,255,255,0.45), transparent),
+    radial-gradient(1px 1px at 90% 85%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1px 1px at 35% 70%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 65% 90%, rgba(255,255,255,0.2), transparent),
+    radial-gradient(1px 1px at 5% 45%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 50% 40%, rgba(255,255,255,0.15), transparent);
+  animation: twinkle 4s ease-in-out infinite alternate;
+  pointer-events: none;
 }
 
 .splash.done {
@@ -185,7 +200,12 @@ body.splash-lock {
   pointer-events: none;
 }
 
+.splash.done .loader-container {
+  animation: rocketLaunch 0.6s ease-in forwards;
+}
+
 .splash-inner {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -196,14 +216,14 @@ body.splash-lock {
   font-size: 20px;
   font-weight: 800;
   letter-spacing: -0.03em;
-  color: var(--ink);
+  color: rgba(255,255,255,0.85);
 }
 
 .splash-bar {
   width: 200px;
   height: 4px;
   border-radius: 999px;
-  background: var(--line);
+  background: rgba(255,255,255,0.08);
   overflow: hidden;
 }
 
@@ -212,7 +232,7 @@ body.splash-lock {
   height: 100%;
   width: 0%;
   border-radius: 999px;
-  background: linear-gradient(90deg, var(--orange-4), var(--orange-1));
+  background: linear-gradient(90deg, #4fc3f7, #03a9f4, #2196f3);
   transition: width 0.25s ease;
 }
 
@@ -220,7 +240,227 @@ body.splash-lock {
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.08em;
-  color: var(--mute);
+  color: rgba(255,255,255,0.35);
+}
+
+/* ==========================================================
+   ROCKET LOADER
+   ========================================================== */
+.loader-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---- Clouds ---- */
+.clouds {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.cloud {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+  filter: blur(18px);
+}
+.cloud1 { width: 120px; height: 40px; top: 12%; left: 100%; animation: moveClouds 8s linear infinite 0s; }
+.cloud2 { width: 80px;  height: 30px; top: 32%; left: 100%; animation: moveClouds 5.5s linear infinite 1.2s; }
+.cloud3 { width: 150px; height: 50px; top: 55%; left: 100%; animation: moveClouds 10s linear infinite 3s; }
+.cloud4 { width: 60px;  height: 22px; top: 78%; left: 100%; animation: moveClouds 6.5s linear infinite 0.5s; }
+.cloud5 { width: 100px; height: 35px; top: 22%; left: 100%; animation: moveClouds 9s linear infinite 2s; }
+
+/* ---- Rocket (loader) ---- */
+.loader {
+  position: relative;
+  width: 80px;
+  height: 130px;
+  z-index: 2;
+}
+.loader > span {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Flame petals — 4 rotated teardrops */
+.loader > span > span {
+  position: absolute;
+  bottom: 0;
+  width: 14px;
+  height: 48px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  transform-origin: center 0;
+  opacity: 0.8;
+  filter: blur(1px);
+}
+.loader > span > span:nth-child(1) {
+  background: linear-gradient(to bottom, #ffcc02, #ff6a00, rgba(255,60,0,0.15));
+  transform: rotate(0deg);
+  animation: lf 0.8s ease-in-out infinite;
+}
+.loader > span > span:nth-child(2) {
+  background: linear-gradient(to bottom, #ff9900, #ff4d00, rgba(255,40,0,0.1));
+  transform: rotate(90deg);
+  animation: lf2 0.9s ease-in-out infinite 0.1s;
+}
+.loader > span > span:nth-child(3) {
+  background: linear-gradient(to bottom, #ffe066, #ff8c00, rgba(255,50,0,0.08));
+  transform: rotate(180deg);
+  animation: lf3 1s ease-in-out infinite 0.2s;
+}
+.loader > span > span:nth-child(4) {
+  background: linear-gradient(to bottom, #ffb300, #ff5722, rgba(255,30,0,0.12));
+  transform: rotate(270deg);
+  animation: lf4 1.1s ease-in-out infinite 0.15s;
+}
+
+/* Rocket body */
+.loader .base {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 42px;
+  height: 85px;
+  background: linear-gradient(180deg, #fafafa 0%, #e8e8e8 40%, #d0d0d0 100%);
+  clip-path: polygon(50% 0%, 100% 65%, 88% 100%, 12% 100%, 0% 65%);
+  z-index: 3;
+  animation: speeder 0.3s linear infinite;
+}
+
+/* Window (circle) */
+.loader .base > span {
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffffff, #b3e5fc, #4fc3f7);
+  border: 2px solid rgba(255,255,255,0.5);
+  box-shadow: 0 0 10px rgba(79,195,247,0.5), inset 0 -1px 3px rgba(0,0,0,0.15);
+}
+
+/* Nose accent line */
+.loader .base .face {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 18px;
+  background: linear-gradient(180deg, transparent, rgba(33,150,243,0.12));
+}
+
+/* ---- Speed lines (longfazers) ---- */
+.longfazers {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.longfazers span {
+  position: absolute;
+  height: 1.5px;
+  opacity: 0;
+  border-radius: 1px;
+}
+.longfazers span:nth-child(1) {
+  top: 28%; width: 80px; left: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+  animation: fazer1 0.6s linear infinite;
+}
+.longfazers span:nth-child(2) {
+  top: 48%; width: 100px; left: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+  animation: fazer2 0.8s linear infinite 0.2s;
+}
+.longfazers span:nth-child(3) {
+  top: 68%; width: 55px; left: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: fazer3 0.5s linear infinite 0.35s;
+}
+.longfazers span:nth-child(4) {
+  top: 42%; width: 140px; left: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent);
+  animation: fazer4 1s linear infinite 0.1s;
+}
+
+/* ==========================================================
+   KEYFRAMES: ROCKET LOADER
+   ========================================================== */
+@keyframes fazer1 {
+  0%   { left: 100%; opacity: 0; }
+  10%  { opacity: 1; }
+  100% { left: -80px; opacity: 0; }
+}
+@keyframes fazer2 {
+  0%   { left: 100%; opacity: 0; }
+  10%  { opacity: 1; }
+  100% { left: -100px; opacity: 0; }
+}
+@keyframes fazer3 {
+  0%   { left: 100%; opacity: 0; }
+  10%  { opacity: 1; }
+  100% { left: -50px; opacity: 0; }
+}
+@keyframes fazer4 {
+  0%   { left: 100%; opacity: 0; }
+  10%  { opacity: 1; }
+  100% { left: -150px; opacity: 0; }
+}
+
+@keyframes speeder {
+  0%   { transform: translateX(-50%) translate(2px, 1px) rotate(0deg); }
+  10%  { transform: translateX(-50%) translate(-1px, -3px) rotate(-1deg); }
+  20%  { transform: translateX(-50%) translate(-2px, 0) rotate(1deg); }
+  30%  { transform: translateX(-50%) translate(1px, 2px) rotate(0deg); }
+  40%  { transform: translateX(-50%) translate(1px, -1px) rotate(1deg); }
+  50%  { transform: translateX(-50%) translate(-1px, 3px) rotate(-1deg); }
+  60%  { transform: translateX(-50%) translate(-1px, 1px) rotate(0deg); }
+  70%  { transform: translateX(-50%) translate(3px, 1px) rotate(-1deg); }
+  80%  { transform: translateX(-50%) translate(-2px, -1px) rotate(1deg); }
+  90%  { transform: translateX(-50%) translate(2px, 1px) rotate(0deg); }
+  100% { transform: translateX(-50%) translate(1px, -2px) rotate(-1deg); }
+}
+
+@keyframes lf {
+  0%   { left: 200%; }
+  100% { left: -200%; opacity: 0; }
+}
+@keyframes lf2 {
+  0%   { left: 200%; }
+  100% { left: -200%; opacity: 0; }
+}
+@keyframes lf3 {
+  0%   { left: 200%; }
+  100% { left: -100%; opacity: 0; }
+}
+@keyframes lf4 {
+  0%   { left: 200%; }
+  100% { left: -100%; opacity: 0; }
+}
+
+@keyframes moveClouds {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-200vw); }
+}
+
+@keyframes twinkle {
+  0%   { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+@keyframes rocketLaunch {
+  0%   { transform: translateY(0) scale(1); opacity: 1; }
+  60%  { transform: translateY(-60px) scale(1.08); opacity: 1; }
+  100% { transform: translateY(-250px) scale(0.4); opacity: 0; }
 }
 
 /* ============ NAV ============ */
