@@ -251,28 +251,29 @@ gsap.utils.toArray(".g-row").forEach((row) => {
   });
 });
 
-gsap.utils.toArray(".g-row").forEach((row, i) => {
+if (window.matchMedia("(min-width: 768px)").matches) {
   // Baris 1 & 3 bergerak ke kiri (0 -> -50%).
   // Baris tengah bergerak ke kanan (-50% -> 0) dengan konten sudah
   // digeser ke kiri terlebih dahulu, sehingga strip selalu menutupi
   // layar dan tidak pernah "mentok" atau hilang saat di-scroll.
   const starts = [0, -50, 0];
   const ends = [-50, 0, -50];
-  gsap.fromTo(
-    row,
-    { xPercent: starts[i] },
-    {
-      xPercent: ends[i],
-      ease: "none",
-      scrollTrigger: {
-        trigger: ".gallery",
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 1.4
-      }
+  const rows = gsap.utils.toArray(".g-row");
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".gallery",
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 1.4,
+      pin: true,
+      anticipatePin: 1
     }
-  );
-});
+  });
+  rows.forEach((row, i) => {
+    tl.add(gsap.fromTo(row, { xPercent: starts[i] }, { xPercent: ends[i], ease: "none" }), 0);
+  });
+}
 
 // ============================================================
 // MOBILE NAV TOGGLE
