@@ -1371,7 +1371,7 @@ body.splash-lock {
 
 /* ============ SECTION 3: GALERI (SCROLL BERSILANGAN) ============ */
 .gallery {
-  height: 300vh;
+  height: 150vh;
   position: relative;
   z-index: 5;
 }
