@@ -1,4 +1,4 @@
-// ============================================================
+﻿// ============================================================
 // FAN CAROUSEL (port vanilla dari komponen React card-fan-carousel)
 // ============================================================
 (function () {
@@ -17,35 +17,35 @@
 
   window.FAN_CARDS = [
     {
-      imgUrl: "asset/web/ft brsm.png",
+      imgUrl: "asset/web/ft brsm.jpg",
       alt: "Pengurus OSIS 1"
     },
     {
-      imgUrl: "asset/web/ft brsm2.png",
+      imgUrl: "asset/web/ft brsm2.jpg",
       alt: "Pengurus OSIS 2"
     },
     {
-      imgUrl: "asset/web/ft brsm3.png",
+      imgUrl: "asset/web/ft brsm3.jpg",
       alt: "Pengurus OSIS 3"
     },
     {
-      imgUrl: "asset/web/ft brsm4.png",
+      imgUrl: "asset/web/ft brsm4.jpg",
       alt: "Pengurus OSIS 4"
     },
     {
-      imgUrl: "asset/web/ft brsm5.png",
+      imgUrl: "asset/web/ft brsm5.jpg",
       alt: "Pengurus OSIS 5"
     },
     {
-      imgUrl: "asset/web/ft brsm6.png",
+      imgUrl: "asset/web/ft brsm6.jpg",
       alt: "Pengurus OSIS 6"
     },
     {
-      imgUrl: "asset/web/ft brsm7.png",
+      imgUrl: "asset/web/ft brsm7.jpg",
       alt: "Pengurus OSIS 7"
     },
     {
-      imgUrl: "asset/web/ft brsm8.png",
+      imgUrl: "asset/web/ft brsm8.jpg",
       alt: "Pengurus OSIS 8"
     }
   ];

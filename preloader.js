@@ -1,32 +1,20 @@
 // ============================================================
-// SPLASH SCREEN: preload foto hero (fan carousel) sambil
-// menampilkan progress bar, lalu membuka halaman (SplashDone).
+// SPLASH SCREEN: progress berbasis waktu (tidak menunggu
+// unduhan gambar) agar halaman selalu terbuka dengan cepat,
+// lalu memicu event SplashDone untuk animasi intro.
 // ============================================================
 (function () {
-  var IMAGES = [
-    "asset/web/ft brsm.png",
-    "asset/web/ft brsm2.png",
-    "asset/web/ft brsm3.png",
-    "asset/web/ft brsm4.png",
-    "asset/web/ft brsm5.png",
-    "asset/web/ft brsm6.png",
-    "asset/web/ft brsm7.png",
-    "asset/web/ft brsm8.png"
-  ];
-  var MIN_MS = 1200;
-  var MAX_MS = 4000;
-
+  var DURATION = 1000;
   var start = performance.now();
-  var loaded = 0;
   var finished = false;
 
   var fill = document.getElementById("splashFill");
   var pct = document.getElementById("splashPct");
 
-  function setProgress() {
-    var p = Math.round((loaded / IMAGES.length) * 100);
+  function setProgress(p) {
+    p = Math.max(0, Math.min(100, p));
     if (fill) fill.style.width = p + "%";
-    if (pct) pct.textContent = p + "%";
+    if (pct) pct.textContent = Math.round(p) + "%";
   }
 
   function finish() {
@@ -44,23 +32,23 @@
     window.dispatchEvent(new Event("SplashDone"));
   }
 
-  function maybeFinish() {
-    var elapsed = performance.now() - start;
-    var allLoaded = loaded >= IMAGES.length;
-    if (!allLoaded && elapsed < MAX_MS) return;
-    setTimeout(finish, Math.max(0, MIN_MS - elapsed));
+  function tick() {
+    var p = ((performance.now() - start) / DURATION) * 100;
+    if (p >= 100) {
+      setProgress(100);
+      finish();
+      return;
+    }
+    setProgress(p);
+    requestAnimationFrame(tick);
   }
 
-  IMAGES.forEach(function (url) {
+  // Preload hanya kartu tengah carousel (cukup untuk tampilan awal),
+  // tidak memblokir splash.
+  ["asset/web/ft brsm4.jpg", "asset/web/ft brsm5.jpg"].forEach(function (url) {
     var img = new Image();
-    img.onload = img.onerror = function () {
-      loaded++;
-      setProgress();
-      maybeFinish();
-    };
     img.src = url;
   });
 
-  setProgress();
-  setTimeout(maybeFinish, MAX_MS);
+  requestAnimationFrame(tick);
 })();

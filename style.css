@@ -916,6 +916,7 @@ body.splash-lock {
   transform: rotate(45deg);
 }
 .sie-body {
+  display: none;
   height: 0;
   overflow: hidden;
   opacity: 0;

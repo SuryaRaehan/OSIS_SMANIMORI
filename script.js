@@ -133,25 +133,38 @@ document.querySelectorAll(".sie").forEach((sie) => {
   const btn = sie.querySelector(".sie-btn");
   const body = sie.querySelector(".sie-body");
   gsap.set(body, { height: 0, opacity: 0, overflow: "hidden" });
+
+  const closeBody = (el) => {
+    gsap.to(el, {
+      height: 0,
+      opacity: 0,
+      duration: 0.35,
+      ease: "power2.inOut",
+      onComplete: () => {
+        el.style.display = "none";
+      }
+    });
+  };
+
   btn.addEventListener("click", () => {
     const isOpen = sie.classList.contains("open");
     document.querySelectorAll(".sie.open").forEach((other) => {
       if (other !== sie) {
         other.classList.remove("open");
-        gsap.to(other.querySelector(".sie-body"), {
-          height: 0,
-          opacity: 0,
-          duration: 0.35,
-          ease: "power2.inOut"
-        });
+        closeBody(other.querySelector(".sie-body"));
       }
     });
     if (isOpen) {
       sie.classList.remove("open");
-      gsap.to(body, { height: 0, opacity: 0, duration: 0.35, ease: "power2.inOut" });
+      closeBody(body);
     } else {
+      body.style.display = "block";
       sie.classList.add("open");
-      gsap.to(body, { height: "auto", opacity: 1, duration: 0.5, ease: "power3.out" });
+      gsap.fromTo(
+        body,
+        { height: 0, opacity: 0 },
+        { height: "auto", opacity: 1, duration: 0.5, ease: "power3.out" }
+      );
     }
   });
 });
