@@ -2008,6 +2008,20 @@ body.splash-lock {
   color: var(--orange-1);
   border-color: var(--orange-1);
 }
+.footer-address {
+  font-size: 14px;
+  line-height: 1.5;
+}
+.footer-address a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.3s, border-color 0.3s;
+}
+.footer-address a:hover {
+  color: var(--orange-1);
+  border-color: var(--orange-1);
+}
 .footer-credit {
   font-size: 12px;
   color: var(--mute);
