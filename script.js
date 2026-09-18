@@ -257,6 +257,7 @@ function setupGalleryMarquee() {
   // Bersihkan tween lama & kembalikan posisi awal agar aman saat resize
   rows.forEach((row) => {
     gsap.killTweensOf(row);
+    row._gTween = null;
     gsap.set(row, { clearProps: "x" });
   });
 
@@ -278,19 +279,31 @@ function setupGalleryMarquee() {
 
     if (i % 2 === 0) {
       // Baris 1 & 3: bergerak ke kiri (0 -> -period)
-      gsap.fromTo(
+      row._gTween = gsap.fromTo(
         row,
         { x: 0 },
         { x: -period, duration: durs[i % durs.length], ease: "none", repeat: -1 }
       );
     } else {
       // Baris 2: bergerak ke kanan (-period -> 0)
-      gsap.fromTo(
+      row._gTween = gsap.fromTo(
         row,
         { x: -period },
         { x: 0, duration: durs[i % durs.length], ease: "none", repeat: -1 }
       );
     }
+  });
+}
+
+function pauseGallery() {
+  gsap.utils.toArray(".g-row").forEach((row) => {
+    if (row._gTween) row._gTween.timeScale(0);
+  });
+}
+
+function resumeGallery() {
+  gsap.utils.toArray(".g-row").forEach((row) => {
+    if (row._gTween) row._gTween.timeScale(1);
   });
 }
 
@@ -315,6 +328,37 @@ function setupGalleryMarquee() {
     rT = setTimeout(setupGalleryMarquee, 200);
   });
 })();
+
+// Hover pause: gerak berhenti saat kursor menyentuh galeri,
+// lalu lanjut mulus saat kursor keluar (hanya perangkat hover).
+(function initGalleryHoverPause() {
+  const gallery = document.querySelector(".gallery");
+  if (!gallery) return;
+  const canHover = window.matchMedia && window.matchMedia("(hover: hover)").matches;
+  if (!canHover) return;
+
+  let hovered = false;
+  gallery.addEventListener("mouseenter", () => {
+    hovered = true;
+    pauseGallery();
+  });
+  gallery.addEventListener("mouseleave", () => {
+    hovered = false;
+    if (!document.hidden) resumeGallery();
+  });
+  window.galleryHovered = () => hovered;
+})();
+
+// Jeda saat tab tidak terlihat agar hemat baterai; lanjut lagi
+// ketika tab kembali aktif (kecuali sedang di-hover).
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    pauseGallery();
+  } else {
+    const hovered = window.galleryHovered && window.galleryHovered();
+    if (!hovered) resumeGallery();
+  }
+});
 
 // ============================================================
 // MOBILE NAV TOGGLE
