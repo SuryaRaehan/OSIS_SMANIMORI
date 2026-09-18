@@ -1,3 +1,51 @@
+// ============================================================
+// GALERI MARQUEE: duplikasi set (wajib jalan duluan, tanpa GSAP,
+// agar animasi CSS @keyframes tetap berjalan walau GSAP gagal
+// dimuat / dimatikan user).
+// ============================================================
+(function initGallery() {
+  const rows = Array.from(document.querySelectorAll(".g-row"));
+  if (!rows.length) return;
+
+  rows.forEach((row) => {
+    // 4 set konten identik (kloning 3x dari 1 set asli).
+    const set = Array.from(row.children).map((el) => el.cloneNode(true));
+    for (let n = 0; n < 3; n++) {
+      const frag = document.createDocumentFragment();
+      set.forEach((el) => frag.appendChild(el.cloneNode(true)));
+      row.appendChild(frag);
+    }
+
+    // Cache & pertegas loading gambar (layout tetap dijamin via CSS).
+    row.querySelectorAll("img").forEach((img) => {
+      img.decoding = "async";
+      img.loading = "lazy";
+    });
+  });
+
+  // Ukur jarak satu set (period) persis dari DOM, lalu simpan sebagai
+  // custom property --gallery-move yang dipakai keyframes marquee agar
+  // sambungan mulus tanpa jeda (translateX(-25%) murni menyisakan 4.5px
+  // karena ambang flex gap). Array rows di-scan ulang tiap resize.
+  const applyMeasure = () => {
+    rows.forEach((row, i) => {
+      const children = row.children;
+      const count = children.length;
+      const quarter = Math.round(count / 4);
+      const period = children[quarter].offsetLeft - children[0].offsetLeft;
+      if (!period) return;
+      row.style.setProperty("--gallery-move", (i % 2 === 0 ? -period : period) + "px");
+    });
+  };
+
+  applyMeasure();
+  let rT;
+  window.addEventListener("resize", () => {
+    clearTimeout(rT);
+    rT = setTimeout(applyMeasure, 200);
+  });
+})();
+
 gsap.registerPlugin(ScrollTrigger);
 
 // ============================================================
@@ -233,121 +281,6 @@ ScrollTrigger.create({
   },
   once: true
 });
-
-// ============================================================
-// GALERI: AUTO-SCROLL SEAMLESS (MARQUEE)
-// Baris diduplikasi 4 set agar strip selalu menutupi layar.
-// Pita (periode satu set) diukur langsung dari DOM, lalu row
-// digeser sebesar satu pita dengan GSAP repeat -1 -> foto terus
-// menyambung tanpa jeda, bergerak sendiri dengan halus tanpa
-// bergantung scroll.
-// ============================================================
-function setupGalleryMarquee() {
-  const rows = gsap.utils.toArray(".g-row");
-  if (!rows.length) return;
-
-  rows.forEach((row) => {
-    // 4 set konten identik (kloning 3x dari 1 set asli)
-    row.querySelectorAll("img").forEach((img) => {
-      img.decoding = "async";
-      img.loading = "lazy";
-    });
-  });
-
-  // Bersihkan tween lama & kembalikan posisi awal agar aman saat resize
-  rows.forEach((row) => {
-    gsap.killTweensOf(row);
-    row._gTween = null;
-    gsap.set(row, { clearProps: "x" });
-  });
-
-  const durs = [28, 34, 22];
-  rows.forEach((row, i) => {
-    const children = row.children;
-    const count = children.length;
-    if (count < 2) return;
-
-    // Pita = jarak antara item pertama set-1 dan item pertama set-2
-    const quarter = Math.round(count / 4);
-    const period = Math.round(children[quarter].offsetLeft - children[0].offsetLeft);
-    if (!period) return;
-
-    if (i % 2 === 0) {
-      // Baris 1 & 3: bergerak ke kiri (0 -> -period)
-      row._gTween = gsap.fromTo(
-        row,
-        { x: 0 },
-        { x: -period, duration: durs[i % durs.length], ease: "none", repeat: -1 }
-      );
-    } else {
-      // Baris 2: bergerak ke kanan (-period -> 0)
-      row._gTween = gsap.fromTo(
-        row,
-        { x: -period },
-        { x: 0, duration: durs[i % durs.length], ease: "none", repeat: -1 }
-      );
-    }
-  });
-}
-
-function pauseGallery() {
-  gsap.utils.toArray(".g-row").forEach((row) => {
-    if (row._gTween) row._gTween.timeScale(0);
-  });
-}
-
-function resumeGallery() {
-  gsap.utils.toArray(".g-row").forEach((row) => {
-    if (row._gTween) row._gTween.timeScale(1);
-  });
-}
-
-(function initGallery() {
-  const rows = gsap.utils.toArray(".g-row");
-
-  // Duplikasi tiap baris: setiap set awal (10 foto) jadi 4 set total.
-  rows.forEach((row) => {
-    const set = Array.from(row.children).map((el) => el.cloneNode(true));
-    for (let n = 0; n < 3; n++) {
-      const frag = document.createDocumentFragment();
-      set.forEach((el) => frag.appendChild(el.cloneNode(true)));
-      row.appendChild(frag);
-    }
-  });
-
-  setupGalleryMarquee();
-
-  let rT;
-  window.addEventListener("resize", () => {
-    clearTimeout(rT);
-    rT = setTimeout(setupGalleryMarquee, 200);
-  });
-
-  // Pengaman: pastikan marquee langsung berjalan (beberapa webview/iframe
-  // menunda visibilitas saat start) dan tetap lanjut setelah bfcache.
-  setTimeout(resumeGallery, 0);
-  window.addEventListener("pageshow", resumeGallery);
-})();
-
-// Hover pause: gerak berhenti saat kursor menyentuh galeri,
-// lalu lanjut mulus saat kursor keluar (hanya perangkat hover).
-(function initGalleryHoverPause() {
-  const gallery = document.querySelector(".gallery");
-  if (!gallery) return;
-  const canHover = window.matchMedia && window.matchMedia("(hover: hover)").matches;
-  if (!canHover) return;
-
-  let hovered = false;
-  gallery.addEventListener("mouseenter", () => {
-    hovered = true;
-    pauseGallery();
-  });
-  gallery.addEventListener("mouseleave", () => {
-    hovered = false;
-    resumeGallery();
-  });
-  window.galleryHovered = () => hovered;
-})();
 
 // ============================================================
 // MOBILE NAV TOGGLE

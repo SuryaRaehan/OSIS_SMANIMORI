@@ -1395,6 +1395,30 @@ body.splash-lock {
   width: max-content;
   will-change: transform;
 }
+
+/* Marquee CSS (di-composite, tanpa JS ticker):
+   --gallery-move (px) diukur JS = jarak satu set. Baris 1 & 3 ke
+   kiri, baris 2 ke kanan. Fallback -25% bila JS gagal mengukur. */
+.gallery-wrap .g-row-1,
+.gallery-wrap .g-row-3 {
+  animation: gallery-marquee-left 28s linear infinite;
+}
+.gallery-wrap .g-row-2 {
+  animation: gallery-marquee-right 34s linear infinite;
+}
+.gallery-wrap:hover .g-row,
+.gallery-wrap:focus-within .g-row {
+  animation-play-state: paused;
+}
+
+@keyframes gallery-marquee-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(var(--gallery-move, -25%)); }
+}
+@keyframes gallery-marquee-right {
+  from { transform: translateX(var(--gallery-move, 25%)); }
+  to   { transform: translateX(0); }
+}
 .g-img {
   width: 300px;
   height: 170px;
