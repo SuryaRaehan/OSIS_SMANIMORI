@@ -261,11 +261,6 @@ function setupGalleryMarquee() {
     gsap.set(row, { clearProps: "x" });
   });
 
-  // Cek preferensi aksesibilitas: matikan gerak jika user minta
-  const reduce =
-    window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reduce) return;
-
   const durs = [28, 34, 22];
   rows.forEach((row, i) => {
     const children = row.children;
