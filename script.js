@@ -327,6 +327,11 @@ function resumeGallery() {
     clearTimeout(rT);
     rT = setTimeout(setupGalleryMarquee, 200);
   });
+
+  // Pengaman: pastikan marquee langsung berjalan (beberapa webview/iframe
+  // menunda visibilitas saat start) dan tetap lanjut setelah bfcache.
+  setTimeout(resumeGallery, 0);
+  window.addEventListener("pageshow", resumeGallery);
 })();
 
 // Hover pause: gerak berhenti saat kursor menyentuh galeri,
@@ -344,21 +349,10 @@ function resumeGallery() {
   });
   gallery.addEventListener("mouseleave", () => {
     hovered = false;
-    if (!document.hidden) resumeGallery();
+    resumeGallery();
   });
   window.galleryHovered = () => hovered;
 })();
-
-// Jeda saat tab tidak terlihat agar hemat baterai; lanjut lagi
-// ketika tab kembali aktif (kecuali sedang di-hover).
-document.addEventListener("visibilitychange", () => {
-  if (document.hidden) {
-    pauseGallery();
-  } else {
-    const hovered = window.galleryHovered && window.galleryHovered();
-    if (!hovered) resumeGallery();
-  }
-});
 
 // ============================================================
 // MOBILE NAV TOGGLE
