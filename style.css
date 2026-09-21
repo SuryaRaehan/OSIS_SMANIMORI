@@ -1416,7 +1416,7 @@ body.splash-lock {
   to   { transform: translateX(var(--gallery-move, -25%)); }
 }
 @keyframes gallery-marquee-right {
-  from { transform: translateX(var(--gallery-move, 25%)); }
+  from { transform: translateX(var(--gallery-move, -25%)); }
   to   { transform: translateX(0); }
 }
 .g-img {

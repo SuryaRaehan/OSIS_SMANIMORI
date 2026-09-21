@@ -28,13 +28,13 @@
   // sambungan mulus tanpa jeda (translateX(-25%) murni menyisakan 4.5px
   // karena ambang flex gap). Array rows di-scan ulang tiap resize.
   const applyMeasure = () => {
-    rows.forEach((row, i) => {
+    rows.forEach((row) => {
       const children = row.children;
       const count = children.length;
       const quarter = Math.round(count / 4);
       const period = children[quarter].offsetLeft - children[0].offsetLeft;
       if (!period) return;
-      row.style.setProperty("--gallery-move", (i % 2 === 0 ? -period : period) + "px");
+      row.style.setProperty("--gallery-move", (-period) + "px");
     });
   };
 
