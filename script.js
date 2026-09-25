@@ -386,12 +386,39 @@ document
 // ============================================================
 const videoPopup = document.getElementById("videoPopup");
 const popupVideo = videoPopup.querySelector(".video-popup-video");
+const popupCard = videoPopup.querySelector(".video-popup-card");
+
+const fitPopupCard = () => {
+  const ratio = popupVideo.videoWidth && popupVideo.videoHeight
+    ? popupVideo.videoWidth / popupVideo.videoHeight
+    : 16 / 9;
+  const maxWidth = Math.min(
+    window.innerWidth * 0.92,
+    960,
+    Math.max(0, window.innerWidth - 48)
+  );
+  const maxHeight = Math.min(
+    window.innerHeight * (window.innerWidth <= 480 ? 0.86 : 0.9),
+    Math.max(0, window.innerHeight - 48)
+  );
+  const width = Math.min(maxWidth, maxHeight * ratio);
+  const height = width / ratio;
+
+  popupCard.style.width = `${width}px`;
+  popupCard.style.height = `${height}px`;
+};
+
+popupVideo.addEventListener("loadedmetadata", fitPopupCard);
+window.addEventListener("resize", fitPopupCard);
 
 const openPopup = () => {
   videoPopup.classList.add("open");
   videoPopup.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
-  popupVideo.src = popupVideo.dataset.videoSrc + "?autoplay=1";
+  popupVideo.src = popupVideo.dataset.videoSrc;
+  fitPopupCard();
+  const play = popupVideo.play();
+  if (play !== undefined) play.catch(() => {});
 };
 
 const closePopup = () => {
@@ -399,7 +426,9 @@ const closePopup = () => {
   videoPopup.classList.remove("open");
   videoPopup.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
-  popupVideo.src = "";
+  popupVideo.pause();
+  popupVideo.removeAttribute("src");
+  popupVideo.load();
 };
 
 document.querySelector(".subline .arrow-pill").addEventListener("click", openPopup);
