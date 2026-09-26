@@ -71,7 +71,7 @@ export const DRIVE_DB = [
   { name: "Isra M'raj", url: "https://drive.google.com/drive/folders/1Tpv78SECki2c9TmplxrvKv1V8aLPOHTg?usp=drive_link" },
   { name: "Kard SD merah", url: "https://drive.google.com/drive/folders/1YnAGbNkvRigMI_OqU3KuYUmm_AQzEWEO?usp=drive_link" },
   { name: "NTSP ke-20", url: "https://drive.google.com/drive/folders/13ehAKZHdGEPMKEdZ4lFIR6bOp1ZEpCGO?usp=sharing" },
-  { name: "Kegiatan 15", url: "https://drive.google.com/drive/my-drive" },
+  { name: "LBB 2026", url: "https://drive.google.com/drive/folders/13Q4KexHyUjd2tMH01ixYBkqt3ZaghF3i?usp=drive_link" },
   { name: "Kegiatan 16", url: "https://drive.google.com/drive/my-drive" },
   { name: "Kegiatan 17", url: "https://drive.google.com/drive/my-drive" },
   { name: "Kegiatan 18", url: "https://drive.google.com/drive/my-drive" },
