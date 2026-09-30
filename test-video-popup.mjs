@@ -13,8 +13,10 @@ function check(name, cond, extra = "") {
   else { fail++; console.log("  FAIL " + name + (extra ? " -> " + extra : "")); }
 }
 
-// Ambil blok script popup video saja
-const m = script.match(/\/\/ POPUP VIDEO EXPLORE[\s\S]*?\n\}\);\n/);
+// Ambil blok script popup video saja, dari komentar penanda sampai
+// listener tombol Explore. Regex dibuat tahan CRLF dan LF karena
+// checkout di Windows bisa mengganti akhir baris.
+const m = script.match(/\/\/ POPUP VIDEO EXPLORE[\s\S]*?\}\);[ \t]*\r?\n/);
 if (!m) throw new Error("blok popup video tidak ditemukan di script.js");
 const block = m[0];
 
