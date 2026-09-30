@@ -17,6 +17,14 @@ worker/wrangler-state/
 db/*.xlsx
 db/*.xls
 
+# Video profil: 444 MB, jauh di atas batas 100 MB GitHub, jadi tidak
+# bisa ikut ter-commit sama sekali. Berkasnya juga sudah dibuang dari
+# riwayat Git. Kalau nanti mau video tampil lagi, jangan taruh di
+# repo: unggah ke YouTube atau hosting video, lalu arahkan
+# data-video-src di index.html ke sana.
+asset/video/*.mp4
+asset/video/*.mov
+
 # OS
 Thumbs.db
 .DS_Store

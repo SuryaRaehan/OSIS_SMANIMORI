@@ -411,11 +411,27 @@ const fitPopupCard = () => {
 popupVideo.addEventListener("loadedmetadata", fitPopupCard);
 window.addEventListener("resize", fitPopupCard);
 
+// Sumber video diisi lewat data-video-src supaya bisa diganti tanpa
+// menyentuh skrip. Kalau atributnya kosong, tombol Explore disembunyikan
+// supaya tidak ada popup kosong yang infuriating bagi pengunjung.
+const popupSrc = (popupVideo.dataset.videoSrc || "").trim();
+if (!popupSrc) {
+  const trigger = document.querySelector(".subline .arrow-pill");
+  if (trigger) trigger.hidden = true;
+}
+
+// Sumber yang gagal dimuat (404, format tidak didukung, atau video
+// belum diunggah) ditutup lagi supaya tidak menyisakan kotak hitam.
+popupVideo.addEventListener("error", () => {
+  if (videoPopup.classList.contains("open")) closePopup();
+});
+
 const openPopup = () => {
+  if (!popupSrc) return;
   videoPopup.classList.add("open");
   videoPopup.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
-  popupVideo.src = popupVideo.dataset.videoSrc;
+  popupVideo.src = popupSrc;
   fitPopupCard();
   const play = popupVideo.play();
   if (play !== undefined) play.catch(() => {});

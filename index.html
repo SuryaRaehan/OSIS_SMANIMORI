@@ -639,9 +639,17 @@
           <line x1="18" y1="6" x2="6" y2="18" />
         </svg>
       </button>
+      <!--
+        Video profil: berkasnya 444 MB, melebihi batas 100 MB GitHub,
+        jadi tidak bisa ditaruh di repo ini dan sengaja dibuang. Tombol
+        Explore disembunyikan otomatis selama data-video-src kosong.
+        Untuk menghidupkannya lagi: unggah videonya ke YouTube atau
+        hosting video, lalu isi atribut di bawah dengan URL-nya.
+        Contoh: data-video-src="https://www.youtube.com/watch?v=xxxx"
+      -->
       <video
         class="video-popup-video"
-        data-video-src="asset/video/PROFIL SMA N 1 WUKIRSARI.mp4"
+        data-video-src=""
         controls
         playsinline
         preload="metadata"
