@@ -8,6 +8,11 @@
   var SESSION_TTL = 240000;
   var sessState = { token: null, exp: 0 };
 
+  // 404 di /api/challenge berarti workerUrl salah ketik atau Worker
+  // sudah dihapus, bukan server yang sedang lambat.
+  var CHALLENGE_404 =
+    "Alamat Worker di config.js salah, atau Worker sudah dihapus.";
+
   function getChallenge() {
     var now = Date.now();
     if (sessState.token && sessState.exp > now + 5000) {
@@ -15,6 +20,7 @@
     }
     return fetch(CF_CONFIG.workerUrl + "/api/challenge", { credentials: "include" })
       .then(function (r) {
+        if (r.status === 404) throw new Error(CHALLENGE_404);
         if (!r.ok) throw new Error("Server tidak merespons. Coba lagi nanti.");
         return r.json();
       })
@@ -25,6 +31,12 @@
         return ch;
       });
   }
+
+  // 404 berarti Worker yang berjalan masih versi lama, jadi rute ini
+  // belum ada. Pesan khusus jauh lebih berguna daripada "Server
+  // bermasalah", yang membuat orang menyalahkan Google Sheet.
+  var NOT_DEPLOYED =
+    "Worker belum punya fitur ini. Admin perlu menjalankan wrangler deploy.";
 
   window.dbRequest = function (path) {
     if (!CONFIGURED) {
@@ -45,6 +57,7 @@
         if (res.status === 401 || res.status === 403) {
           throw new Error("Akses ditolak sistem keamanan. Muat ulang halaman untuk mencoba lagi.");
         }
+        if (res.status === 404) throw new Error(NOT_DEPLOYED);
         if (!res.ok) throw new Error("Server bermasalah. Coba lagi nanti.");
         return res.json();
       });
@@ -86,6 +99,7 @@
           if (res.status === 401) {
             throw new Error("Akses ditolak sistem keamanan. Muat ulang halaman untuk mencoba lagi.");
           }
+          if (res.status === 404) throw new Error(NOT_DEPLOYED);
           if (!res.ok) {
             throw new Error(WRITE_MESSAGES[data.error] || "Server bermasalah. Coba lagi nanti.");
           }
@@ -118,6 +132,7 @@
             throw new Error("Akses ditolak sistem keamanan. Muat ulang halaman untuk mencoba lagi.");
           }
           if (res.status === 403) throw new Error("Token admin salah.");
+          if (res.status === 404) throw new Error(NOT_DEPLOYED);
           if (!res.ok) {
             throw new Error(WRITE_MESSAGES[data.error] || "Server bermasalah. Coba lagi nanti.");
           }

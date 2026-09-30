@@ -5,8 +5,14 @@
 //   1. Buka Google Sheet daftar peserta Anda.
 //   2. Menu "Extensions" -> "Apps Script".
 //   3. Hapus isi editor, tempel seluruh kode ini, lalu Save.
-//   4. Ganti SHEET_WRITE_TOKEN di bawah dengan token rahasia
-//     milik Anda (acak, panjang, jangan dipakai di tempat lain).
+//   4. Klik ikon gear "Project Settings" > tab "Script Properties",
+//     lalu tambahkan satu baris:
+//        Key   : SHEET_WRITE_TOKEN
+//        Value : token acak panjang milik Anda sendiri
+//     Token SENGAJA TIDAK ditulis di file ini. Karena itu file ini
+//     aman di-commit dan aman dibagikan ke siapa pun tanpa
+//     membocorkan apa pun. Nilai token yang sama juga disimpan
+//     sebagai Worker secret bernama ADMIN_TOKEN.
 //   5. Klik "Deploy" -> "New deployment" -> type "Web app".
 //      Execute as  : Me
 //      Who has access: Anyone
@@ -14,12 +20,22 @@
 //      URL itu WAJIB rahasia: siapa pun yang memilikinya bisa
 //      membaca dan menulis daftar. Jangan pernah di-commit,
 //      jangan ditaruh di file frontend, hanya di Worker secret.
+//
+// Catatan: script ini hanya membaca sheet PERTAMA di spreadsheet.
+// Kalau nanti Anda menambah sheet lain, pastikan daftar nama
+// tetap berada di sheet pertama.
 // ============================================================
 
-var SHEET_WRITE_TOKEN = "GANTI_DENGAN_TOKEN_RAHASIA_ANDA";
+var TOKEN_PROP = "SHEET_WRITE_TOKEN";
 
 var FIRST_DATA_ROW = 5; // baris pertama nama (baris 4 = header NAMA)
 var NAME_HEADER = "NAMA";
+
+function writeToken_() {
+  return String(
+    PropertiesService.getScriptProperties().getProperty(TOKEN_PROP) || ""
+  ).trim();
+}
 
 function sheet_() {
   return SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
@@ -60,7 +76,12 @@ function doPost(e) {
     return json_({ ok: false, error: "bad_json" });
   }
 
-  if (!payload || payload.token !== SHEET_WRITE_TOKEN) {
+  // Dicek lebih dulu supaya kalau Script Properties belum diisi,
+  // pesannya langsung menunjuk masalahnya, bukan sekadar "bad_token".
+  var expected = writeToken_();
+  if (!expected) return json_({ ok: false, error: "no_token_configured" });
+
+  if (!payload || payload.token !== expected) {
     return json_({ ok: false, error: "bad_token" });
   }
   if (!Array.isArray(payload.names)) {

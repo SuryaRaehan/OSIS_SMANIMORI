@@ -335,10 +335,9 @@
         })
         .catch(function (err) {
           setBusy(false);
-          showError(
-            (err && err.message ? err.message : "Gagal memuat data.") +
-              " Coba lagi dalam beberapa saat."
-          );
+          // api.js sudah mengirim pesan lengkap dalam bahasa Indonesia,
+          // jadi jangan ditumpuki sufiks lagi di sini.
+          showError(err && err.message ? err.message : "Gagal memuat data.");
         });
     }
 
