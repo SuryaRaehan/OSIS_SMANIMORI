@@ -83,7 +83,7 @@
             id="namaInput"
             class="cek-input"
             type="text"
-            placeholder="contoh: SURYA RAEHAN ARYUDI"
+            placeholder="contoh: SURYA RAEHAAN ARYUDI"
             autocomplete="off"
             spellcheck="false"
           />
@@ -157,7 +157,9 @@
     <div class="confetti" id="confetti" aria-hidden="true"></div>
   </div>
 
-  <script src="pengumuman-data.js"></script>
+  <!-- Naikkan v= setiap kali isi pengumuman-data.js berubah, supaya
+       browser tidak memakai salinan lama yang masih di-cache. -->
+  <script src="pengumuman-data.js?v=20260930"></script>
   <script>
     const toggle = document.getElementById("navToggle");
     const links = document.getElementById("navLinks");
@@ -218,9 +220,10 @@
     var confetti = document.getElementById("confetti");
     var hasilWa = document.getElementById("hasilWa");
 
-    // Pencocokan lokal: huruf besar/kecil, spasi berlebih, dan tanda
-    // baca diabaikan. Ambil satu hasil teratas supaya layar tidak
-    // berkedip selama daftar dibaca.
+    // Pencocokan lokal: huruf besar/kecil dan spasi berlebih diabaikan.
+    // Tanda baca TIDAK diabaikan, jadi "S.R.A." tetap ditolak. Nama
+    // asli dari daftar dipakai untuk ditampilkan di modal supaya
+    // huruf kapitalnya tetap rapi.
     var daftarLolos = (window.PENGUMUMAN || []).map(function (n) {
       return {
         asli: String(n || "").trim(),

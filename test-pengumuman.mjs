@@ -148,11 +148,35 @@ console.log("\n== toleransi ejaan ==");
 const tol = [
   ["  andreas   davioso  ", "spasi berlebih + huruf kecil"],
   ["ANDREAS DAVIOSO", "huruf besar semua"],
+  ["andreas davioso", "huruf kecil semua"],
+  ["aNdReAs DaViOsO", "kapital-kecil campur"],
+  ["AnDrEaS dAvIoSo", "kapital hanya di awal kata"],
   ["Andreas\tDavioso", "tab sebagai spasi"],
 ];
 for (const [input, ket] of tol) {
   clickWith(input);
   check(`toleran: ${ket}`, results.hasilTag.textContent === "LOLOS", results.hasilTag.textContent);
+}
+
+// Nama asli dari daftar harus tetap tampil rapi di modal, apa pun
+// ejaan yang diketik pengunjung.
+for (const ketik of ["andreas davioso", "ANDREAS DAVIOSO", "aNdReAs DaViOsO"]) {
+  clickWith(ketik);
+  check(`tampil "Andreas Davioso" untuk input "${ketik}"`, results.hasilName.textContent === "Andreas Davioso", results.hasilName.textContent);
+}
+
+// Contoh di kotak input harus benar-benar ada di daftar, kalau tidak
+// pengunjung yang menyalinnya akan mengira pencocokan nama rusak.
+console.log("\n== contoh di placeholder ==");
+const mPlaceholder = html.match(/id="namaInput"[\s\S]{0,300}?placeholder="contoh:\s*([^"]+)"/);
+if (!mPlaceholder) {
+  check("placeholder 'contoh:' ditemukan", false, "tidak ketemu di pengumuman.html");
+} else {
+  const contoh = mPlaceholder[1];
+  const adaDiDaftar = PENGUMUMAN.some((n) => String(n).trim().toLowerCase() === contoh.trim().toLowerCase());
+  check(`placeholder "${contoh}" ada di daftar`, adaDiDaftar);
+  clickWith(contoh);
+  check("menyalin placeholder memberi LOLOS", results.hasilTag.textContent === "LOLOS", results.hasilTag.textContent);
 }
 
 console.log("\n== nama DI LUAR daftar -> TIDAK LOLOS, TANPA link WA ==");
@@ -202,7 +226,7 @@ console.log("\n== halaman tidak lagi menyentuh server ==");
 check("tidak memanggil dbRequest", !html.includes("dbRequest"));
 check("tidak memuat api.js", !html.includes('src="api.js"'));
 check("tidak memuat config.js", !html.includes('src="config.js"'));
-check("memuat pengumuman-data.js", html.includes('src="pengumuman-data.js"'));
+check("memuat pengumuman-data.js", /src="pengumuman-data\.js(\?[^"]*)?"/.test(html));
 check("elemen cekNote dihapus", !html.includes("cekNote"));
 check("tidak ada .then( di logika cek", !/dbRequest[\s\S]{0,80}then/.test(inline));
 
