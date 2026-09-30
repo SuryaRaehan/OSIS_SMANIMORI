@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Admin Daftar Lolos | OSIS SMAN 1 Imogiri</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..900;1,9..40,400..900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f5efe2;
+      --ink: #141416;
+      --mute: #8b847a;
+      --line: #dad2bf;
+      --orange-1: #e85a2b;
+      --orange-2: #d9351f;
+      --green: #14b078;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "DM Sans", system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 26px;
+      box-shadow: 0 24px 48px -32px rgba(20, 8, 0, 0.35);
+    }
+    .card + .card { margin-top: 18px; }
+    h1 { font-size: 26px; margin: 0 0 6px; letter-spacing: -0.02em; }
+    h2 { font-size: 15px; margin: 0 0 14px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--mute); }
+    p.lead { margin: 0 0 22px; color: var(--mute); font-size: 14.5px; line-height: 1.6; }
+    label { display: block; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+    input, textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 13px 15px;
+      font-family: inherit;
+      font-size: 14.5px;
+      color: var(--ink);
+      background: #fffdf9;
+      outline: none;
+    }
+    input:focus, textarea:focus { border-color: var(--orange-1); background: #fff; }
+    textarea {
+      min-height: 340px;
+      resize: vertical;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+    .row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+    button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 18px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--orange-1), var(--orange-2));
+      color: #fff;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    button:hover:not(:disabled) { transform: translateY(-1px); }
+    button:disabled { opacity: 0.55; cursor: progress; }
+    button.ghost {
+      background: #fff;
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+    .btn-file {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 18px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      background: #fff;
+      color: var(--ink);
+    }
+    .btn-file:hover { border-color: var(--orange-1); color: var(--orange-1); }
+    .note {
+      margin: 14px 0 0;
+      font-size: 13.5px;
+      font-weight: 600;
+      line-height: 1.55;
+      min-height: 20px;
+    }
+    .note.ok { color: var(--green); }
+    .note.err { color: var(--orange-2); }
+    .count { font-weight: 700; color: var(--ink); }
+    .hint { font-size: 13px; color: var(--mute); line-height: 1.65; margin: 0 0 16px; }
+    .hint code {
+      background: #f1ead9;
+      border-radius: 6px;
+      padding: 1px 5px;
+      font-size: 12.5px;
+    }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Admin Daftar Lolos</h1>
+      <p class="lead">
+        Halaman ini menulis daftar nama yang dipakai halaman pengumuman.
+        Perubahan langsung berlaku di situs tanpa commit dan tanpa deploy.
+      </p>
+
+      <div id="gate">
+        <label for="tokenInput">Token Admin</label>
+        <input
+          id="tokenInput"
+          type="password"
+          placeholder="Token yang sama dengan ADMIN_TOKEN di Worker"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <div class="row">
+          <button type="button" id="gateBtn">Buka Daftar</button>
+        </div>
+        <p class="note" id="gateNote" role="status" aria-live="polite"></p>
+      </div>
+
+      <div id="panel" class="hidden">
+        <label for="namesInput">Nama Lolos (satu nama per baris)</label>
+        <textarea id="namesInput" spellcheck="false" placeholder="SURYA RAEHAN ARYUDI"></textarea>
+        <p class="hint" style="margin: 12px 0 0">
+          Baris kosong dan nama duplikat otomatis dibuang. Urutan baris
+          menentukan urutan nomor.
+        </p>
+        <div class="row">
+          <button type="button" id="saveBtn">Simpan ke Spreadsheet</button>
+          <button type="button" id="reloadBtn" class="ghost">Muat Ulang</button>
+          <button type="button" id="exportBtn" class="ghost">Unduh .xlsx</button>
+          <label class="btn-file" for="fileInput">Unggah .xlsx</label>
+          <input id="fileInput" type="file" accept=".xlsx,.xls" class="hidden" />
+        </div>
+        <p class="note" id="panelNote" role="status" aria-live="polite"></p>
+        <p class="note" id="countNote"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+  <script src="config.js"></script>
+  <script src="api.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

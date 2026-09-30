@@ -11,6 +11,12 @@ worker/wrangler-state/
 .env
 .env.local
 
+# Spreadsheet lokal: ini file kerjaan pribadi, bukan sumber data
+# situs. Sengaja tidak di-commit supaya auto-push.ps1 tidak
+# ikut membuat commit setiap kali daftar diedit di Excel.
+db/*.xlsx
+db/*.xls
+
 # OS
 Thumbs.db
 .DS_Store

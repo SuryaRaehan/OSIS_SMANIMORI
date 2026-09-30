@@ -7,3 +7,23 @@ compatibility_date = "2026-08-01"
 # Isi dengan domain situs Anda, mis. "https://suryaraehan.github.io" atau
 # "https://smanimori.com". TANPA garis miring di akhir.
 ALLOWED_ORIGINS = "https://suryaraehan.github.io,http://localhost:3000,http://127.0.0.1:3000"
+
+# ============================================================
+# SECRET (JANGAN ditulis di file ini — sudah tidak bisa!)
+# ============================================================
+# Set sekali lewat perintah, nilainya tidak masuk ke git:
+#
+#   npx wrangler secret put API_SECRET
+#     -> HMAC untuk sesi akses, string acak panjang
+#
+#   npx wrangler secret put SHEET_API_URL
+#     -> URL Google Apps Script berawalan /exec (WAJIB rahasia:
+#        siapa pun yang punya URL ini bisa baca & tulis daftar)
+#
+#   npx wrangler secret put ADMIN_TOKEN
+#     -> token untuk halaman admin.html, boleh sama dengan
+#        SHEET_WRITE_TOKEN di apps-script.gs
+#
+# Ganti/membatalkan secret: hapus dari dashboard Worker > Settings >
+# Variables and Secrets, lalu ulangi perintah di atas.
+# ============================================================

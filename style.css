@@ -1815,6 +1815,31 @@ body.splash-lock {
   transform: translateY(-2px);
   box-shadow: 0 18px 32px -12px rgba(217, 53, 31, 0.85);
 }
+.cek-btn:disabled {
+  cursor: progress;
+  opacity: 0.72;
+  transform: none;
+  box-shadow: 0 10px 20px -14px rgba(217, 53, 31, 0.7);
+}
+.cek-btn.busy svg {
+  animation: cek-spin 0.9s linear infinite;
+}
+.cek-note {
+  display: none;
+  margin: 0;
+  color: #ffd9c2;
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: center;
+}
+.cek-note.show {
+  display: block;
+}
+
+@keyframes cek-spin {
+  to { transform: rotate(360deg); }
+}
 
 @keyframes cek-shake {
   0%, 100% { transform: translateX(0); }
@@ -1952,6 +1977,38 @@ body.splash-lock {
   font-size: 14px;
   line-height: 1.6;
   color: var(--ink-soft);
+}
+
+/* ============ TOMBOL GRUP WHATSAPP DI MODAL LOLOS ============ */
+.hasil-wa {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 22px;
+  padding: 15px 20px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #128c7e, #25d366);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 14px 26px -12px rgba(18, 140, 126, 0.8);
+  transition: transform 0.3s cubic-bezier(0.6, 0, 0.2, 1), box-shadow 0.3s ease;
+}
+.hasil-wa:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 32px -12px rgba(18, 140, 126, 0.9);
+}
+.hasil-wa:focus-visible {
+  outline: 3px solid #25d366;
+  outline-offset: 3px;
+}
+/* Wajib ada: aturan display di atas menimpa atribut [hidden],
+   jadi tanpa baris ini tombol tetap tampil untuk yang TIDAK LOLOS. */
+.hasil-wa[hidden] {
+  display: none;
 }
 
 /* Confetti */
