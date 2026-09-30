@@ -95,7 +95,6 @@
             <polyline points="12 5 19 12 12 19" />
           </svg>
         </button>
-        <p class="cek-note" id="cekNote" role="status" aria-live="polite"></p>
       </div>
     </section>
   </main>
@@ -158,8 +157,7 @@
     <div class="confetti" id="confetti" aria-hidden="true"></div>
   </div>
 
-  <script src="config.js"></script>
-  <script src="api.js"></script>
+  <script src="pengumuman-data.js"></script>
   <script>
     const toggle = document.getElementById("navToggle");
     const links = document.getElementById("navLinks");
@@ -215,36 +213,23 @@
     // ============ CEK KELULUSAN ============
     var namaInput = document.getElementById("namaInput");
     var cekBtn = document.getElementById("cekBtn");
-    var cekBtnText = document.getElementById("cekBtnText");
-    var cekNote = document.getElementById("cekNote");
     var hasilModal = document.getElementById("hasilModal");
     var hasilCard = document.getElementById("hasilCard");
     var confetti = document.getElementById("confetti");
     var hasilWa = document.getElementById("hasilWa");
 
+    // Pencocokan lokal: huruf besar/kecil, spasi berlebih, dan tanda
+    // baca diabaikan. Ambil satu hasil teratas supaya layar tidak
+    // berkedip selama daftar dibaca.
+    var daftarLolos = (window.PENGUMUMAN || []).map(function (n) {
+      return {
+        asli: String(n || "").trim(),
+        kunci: String(n || "").trim().toLowerCase().replace(/\s+/g, " ")
+      };
+    });
+
     function normalize(s) {
-      return String(s || "")
-        .normalize("NFKC")
-        .toUpperCase()
-        .replace(/[^A-Z0-9]+/g, " ")
-        .trim()
-        .replace(/\s+/g, " ");
-    }
-
-    function setBusy(busy, label) {
-      cekBtn.disabled = busy;
-      cekBtn.classList.toggle("busy", busy);
-      cekBtnText.textContent = busy ? label : "Cek Hasil";
-    }
-
-    function showError(msg) {
-      cekNote.textContent = msg;
-      cekNote.classList.add("show");
-    }
-
-    function clearError() {
-      cekNote.textContent = "";
-      cekNote.classList.remove("show");
+      return String(s || "").trim().toLowerCase().replace(/\s+/g, " ");
     }
 
     // Hanya skema https:// yang diterima, supaya data-wa tidak bisa
@@ -255,6 +240,9 @@
       return /^https:\/\//i.test(raw) ? raw : null;
     }
 
+    // Tombol WA hanya dipasang untuk yang LOLOS. Selain disembunyikan,
+    // href-nya juga dilepas supaya link-nya benar-benar tidak ada di
+    // DOM dan tidak bisa diklik atau disalin untuk yang tidak lolos.
     function applyWaLink(lulus) {
       if (!hasilWa) return;
       var link = waLinkFor(lulus);
@@ -313,8 +301,8 @@
 
     function cekNama() {
       var typed = namaInput.value;
-      if (!normalize(typed)) {
-        showError("Silakan ketik namamu dulu.");
+      var kunci = normalize(typed);
+      if (!kunci) {
         namaInput.focus();
         namaInput.placeholder = "Silakan ketik namamu dulu";
         namaInput.classList.add("shake");
@@ -322,23 +310,17 @@
         return;
       }
 
-      clearError();
-      setBusy(true, "Memuat…");
-      var requested = typed.trim();
+      // Dicocokkan di dalam browser, jadi tidak ada server yang
+      // dihubungi dan halaman tetap jalan walau Worker mati.
+      var cocok = null;
+      for (var i = 0; i < daftarLolos.length; i++) {
+        if (daftarLolos[i].kunci === kunci) {
+          cocok = daftarLolos[i].asli;
+          break;
+        }
+      }
 
-      // Pencocokan dilakukan di server: browser hanya menerima
-      // true/false untuk satu nama, daftar lengkap tidak pernah dikirim.
-      dbRequest("kelulusan?nama=" + encodeURIComponent(requested))
-        .then(function (res) {
-          setBusy(false);
-          openModal(!!res.found, res.nama || requested);
-        })
-        .catch(function (err) {
-          setBusy(false);
-          // api.js sudah mengirim pesan lengkap dalam bahasa Indonesia,
-          // jadi jangan ditumpuki sufiks lagi di sini.
-          showError(err && err.message ? err.message : "Gagal memuat data.");
-        });
+      openModal(!!cocok, cocok || typed.trim());
     }
 
     cekBtn.addEventListener("click", cekNama);
