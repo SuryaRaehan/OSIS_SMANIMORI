@@ -83,7 +83,7 @@
             id="namaInput"
             class="cek-input"
             type="text"
-            placeholder="contoh: SURYA RAEHAAN ARYUDI"
+            placeholder="contoh: SURYA RAEHAN ARYUDI"
             autocomplete="off"
             spellcheck="false"
           />
@@ -158,8 +158,10 @@
   </div>
 
   <!-- Naikkan v= setiap kali isi pengumuman-data.js berubah, supaya
-       browser tidak memakai salinan lama yang masih di-cache. -->
-  <script src="pengumuman-data.js?v=20260930"></script>
+       browser tidak memakai salinan lama yang masih di-cache.
+       WAJIB >= tanggal commit terakhir yang menyentuh pengumuman-data.js.
+       Diuji oleh test-pengumuman.mjs ("versi cache data tidak usang"). -->
+  <script src="pengumuman-data.js?v=20261001"></script>
   <script>
     const toggle = document.getElementById("navToggle");
     const links = document.getElementById("navLinks");

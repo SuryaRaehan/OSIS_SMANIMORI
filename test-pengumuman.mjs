@@ -1,6 +1,7 @@
 // Harness: menguji logika cek nama + aturan tombol WA di pengumuman.html
 // dengan DOM minimal, tanpa browser sungguhan.
 import { readFileSync } from "node:fs";
+import { execFileSync } from "node:child_process";
 import vm from "node:vm";
 
 const html = readFileSync("pengumuman.html", "utf8");
@@ -229,6 +230,62 @@ check("tidak memuat config.js", !html.includes('src="config.js"'));
 check("memuat pengumuman-data.js", /src="pengumuman-data\.js(\?[^"]*)?"/.test(html));
 check("elemen cekNote dihapus", !html.includes("cekNote"));
 check("tidak ada .then( di logika cek", !/dbRequest[\s\S]{0,80}then/.test(inline));
+
+console.log("\n== versi cache data tidak usang ==");
+// Isi pengumuman-data.js berubah => query v= di <script> WAJIB ikut
+// dinaikkan. Kalau tidak, browser (dan GitHub Pages) tetap memakai
+// salinan lama yang di-cache, sehingga nama yang baru diperbaiki
+// tetap gagal saat diketik.
+{
+  const v = (html.match(/pengumuman-data\.js\?v=(\d{8})/) || [])[1];
+  check("script punya query v=YYYYMMDD", !!v);
+
+  // Bandingkan dengan tanggal commit terakhir yang menyentuh file data.
+  let last = "";
+  try {
+    last = execFileSync(
+      "git",
+      ["log", "-1", "--format=%cd", "--date=format:%Y%m%d", "--", "pengumuman-data.js"],
+      { encoding: "utf8" }
+    ).trim();
+  } catch {
+    // git tidak tersedia: lewati, bukan alasan gagal test.
+  }
+
+  if (last) {
+    check(
+      `v= (${v}) >= commit terakhir pengumuman-data.js (${last})`,
+      !!v && Number(v) >= Number(last)
+    );
+  } else {
+    console.log("  (lewati: tanggal commit tidak bisa dibaca)");
+  }
+
+  // Nama yang pernah diperbaiki ejaannya harus ada persis di daftar,
+  // kalau tidak maka versi cache di atas tidak ada artinya.
+  for (const nama of [
+    "Surya Raehan Aryudi",
+    "Gisela Alesta Meiyana",
+    "Nur Muhammad Ilham",
+  ]) {
+    check(`daftar memuat "${nama}"`, dataSrc.includes(`"${nama}"`));
+  }
+  // Varian ejaan lama yang dulu tertinggal tidak boleh muncul lagi.
+  for (const salah of [
+    "Surya Raehaan Aryudi",
+    "Gisela Alesta Meiayana",
+    "Muhammad Nur Ilham",
+    "A'an Asbi Putra",
+  ]) {
+    check(`tidak ada lagi "${salah}"`, !dataSrc.includes(`"${salah}"`));
+  }
+  // Placeholder harus memakai nama yang benar-benar ada di daftar.
+  const ph = (html.match(/placeholder="contoh: ([^"]+)"/) || [])[1] || "";
+  check(
+    `placeholder memakai nama valid (${ph})`,
+    dataSrc.toUpperCase().includes(`"${ph.toUpperCase()}"`)
+  );
+}
 
 console.log(`\n=== ${pass} lulus, ${fail} gagal ===\n`);
 process.exit(fail === 0 ? 0 : 1);
