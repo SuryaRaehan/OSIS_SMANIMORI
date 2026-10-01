@@ -158,21 +158,38 @@ function rawOrigin(request) {
   return (request.headers.get("Origin") || request.headers.get("Referer") || "").trim();
 }
 
-function originAllowed(env, request) {
-  const allowed = (env.ALLOWED_ORIGINS || "")
+function allowedPatterns(env) {
+  return (env.ALLOWED_ORIGINS || "")
     .split(",")
     .map((s) => s.trim().replace(/\/+$/, ""))
     .filter(Boolean);
-  if (!allowed.length) return true;
-  const probe = rawOrigin(request);
+}
+
+// Pola boleh memakai satu tanda bintang untuk satu label host,
+// mis. "https://*.vercel.app". Tanpa ini, deployment preview Vercel
+// (namanya acak, mis. osissmanimori-abc123.vercel.app) akan ditolak
+// dan browser hanya menampilkan "Failed to fetch".
+function matchOrigin(patterns, probe) {
   if (!probe) return false;
-  return allowed.some((a) => probe === a || probe.startsWith(a + "/"));
+  return patterns.some((a) => {
+    if (a === "*") return true;
+    if (a.indexOf("*") === -1) return probe === a || probe.startsWith(a + "/");
+    const rx = new RegExp(
+      "^" + a.split("*").map((p) => p.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("[^./]+") + "(?:/|$)"
+    );
+    return rx.test(probe);
+  });
+}
+
+function originAllowed(env, request) {
+  const allowed = allowedPatterns(env);
+  if (!allowed.length) return true;
+  return matchOrigin(allowed, rawOrigin(request));
 }
 
 function corsFor(env, request) {
   const origin = request.headers.get("Origin");
-  const allowed = (env.ALLOWED_ORIGINS || "").split(",").map((s) => s.trim()).filter(Boolean);
-  const ok = origin && allowed.includes(origin);
+  const ok = matchOrigin(allowedPatterns(env), origin);
   return {
     "Access-Control-Allow-Origin": ok ? origin : "",
     "Access-Control-Allow-Credentials": "true",
@@ -279,7 +296,10 @@ export default {
       if (!(await isAuthorized(request, env, ip, now))) {
         return json({ error: "unauthorized" }, 401, cors);
       }
-      return json({ items: DRIVE_DB }, 200, cors);
+      // Hanya kirim folder yang punyalah tautan. Entri tanpa url
+      // hanya akan membuat pengunjung melihat tautan yang gagal.
+      const items = DRIVE_DB.filter((it) => typeof it.url === "string" && it.url);
+      return json({ items }, 200, cors);
     }
 
     // --- Cek kelulusan: pencocokan dilakukan di server, jadi

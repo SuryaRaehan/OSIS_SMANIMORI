@@ -56,6 +56,10 @@ export const PPT_DB = {
   ]
 };
 
+// Folder yang sudah ada tautan publiknya.
+// Folder tanpa url TIDAK ditampilkan sama sekali: berbasis my-drive
+// hanya membuka "Masuk ke Google" untuk pengunjung, dan link seperti
+// itu terlihat seperti tautan rusak di mata siswa.
 export const DRIVE_DB = [
   { name: "ClassMeet#1", url: "https://drive.google.com/drive/folders/1WRqHj8G511QbMgBeN0k-3IEDhtg2M9xE?usp=drive_link" },
   { name: "ClassMeet#2", url: "https://drive.google.com/drive/folders/1v38iVAyJoo4yvb6eXxgzZGhLfWgtnme3?usp=drive_link" },
@@ -71,20 +75,5 @@ export const DRIVE_DB = [
   { name: "Isra M'raj", url: "https://drive.google.com/drive/folders/1Tpv78SECki2c9TmplxrvKv1V8aLPOHTg?usp=drive_link" },
   { name: "Kard SD merah", url: "https://drive.google.com/drive/folders/1YnAGbNkvRigMI_OqU3KuYUmm_AQzEWEO?usp=drive_link" },
   { name: "NTSP ke-20", url: "https://drive.google.com/drive/folders/13ehAKZHdGEPMKEdZ4lFIR6bOp1ZEpCGO?usp=sharing" },
-  { name: "LBB 2026", url: "https://drive.google.com/drive/folders/13Q4KexHyUjd2tMH01ixYBkqt3ZaghF3i?usp=drive_link" },
-  { name: "Kegiatan 16", url: "https://drive.google.com/drive/my-drive" },
-  { name: "Kegiatan 17", url: "https://drive.google.com/drive/my-drive" },
-  { name: "Kegiatan 18", url: "https://drive.google.com/drive/my-drive" },
-  { name: "Kegiatan 19", url: "https://drive.google.com/drive/my-drive" },
-  { name: "Kegiatan 20", url: "https://drive.google.com/drive/my-drive" },
-  { name: "Kegiatan 21", url: "https://drive.google.com/drive/my-drive" },
-  { name: "Kegiatan 22", url: "https://drive.google.com/drive/my-drive" },
-  { name: "Kegiatan 23", url: "https://drive.google.com/drive/my-drive" },
-  { name: "Kegiatan 24", url: "https://drive.google.com/drive/my-drive" },
-  { name: "Kegiatan 25", url: "https://drive.google.com/drive/my-drive" },
-  { name: "Kegiatan 26", url: "https://drive.google.com/drive/my-drive" },
-  { name: "Kegiatan 27", url: "https://drive.google.com/drive/my-drive" },
-  { name: "Kegiatan 28", url: "https://drive.google.com/drive/my-drive" },
-  { name: "Kegiatan 29", url: "https://drive.google.com/drive/my-drive" },
-  { name: "Kegiatan 30", url: "https://drive.google.com/drive/my-drive" }
+  { name: "LBB 2026", url: "https://drive.google.com/drive/folders/13Q4KexHyUjd2tMH01ixYBkqt3ZaghF3i?usp=drive_link" }
 ];

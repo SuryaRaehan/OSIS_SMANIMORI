@@ -3,7 +3,6 @@ import { readFileSync } from "node:fs";
 import vm from "node:vm";
 
 const src = readFileSync("api.js", "utf8");
-const html = readFileSync("pengumuman.html", "utf8");
 
 function makeSandbox(responses) {
   const calls = [];
@@ -175,15 +174,68 @@ console.log("\n=== jalur sukses ===");
   check("dbPost memakai credentials include", call.opts.credentials === "include");
 }
 
-console.log("\n=== pengumuman.html tidak lagi menambah sufiks ===");
-check(
-  "sufiks 'Coba lagi dalam beberapa saat.' dihapus",
-  !html.includes("Coba lagi dalam beberapa saat")
+console.log("\n=== kegagalan jaringan (yang muncul sebagai 'Failed to fetch') ===");
+await expectError(
+  "TypeError dari fetch -> pesan yang menyebut ALLOWED_ORIGINS",
+  () => {
+    const { sandbox } = makeSandbox({ "*": new TypeError("Failed to fetch") });
+    return sandbox.dbRequest("kelulusan?nama=BUDI");
+  },
+  /ALLOWED_ORIGINS/
 );
-check(
-  "showError menerima pesan apa adanya",
-  html.includes('showError(err && err.message ? err.message : "Gagal memuat data.");')
+await expectError(
+  "challenge 403 ->(domain belum diizinkan) pesan jelas, bukan 401",
+  () => {
+    const { sandbox } = makeSandbox({
+      "/api/challenge": { status: 403, body: { error: "origin_not_allowed" } },
+    });
+    return sandbox.dbRequest("kelulusan?nama=BUDI");
+  },
+  /belum diizinkan Worker/
 );
+await expectError(
+  "respons 403 origin_not_allowed -> pesan jelas",
+  () => {
+    const { sandbox } = makeSandbox({
+      "/api/challenge": { status: 200, body: { token: "t" } },
+      "/api/kelulusan": { status: 403, body: { error: "origin_not_allowed" } },
+    });
+    return sandbox.dbRequest("kelulusan?nama=BUDI");
+  },
+  /belum diizinkan Worker/
+);
+await expectError(
+  "dbPost gagal jaringan -> pesan yang menyebut ALLOWED_ORIGINS",
+  () => {
+    const { sandbox } = makeSandbox({ "*": new TypeError("Failed to fetch") });
+    return sandbox.dbPost("kelulusan/import", { names: [] });
+  },
+  /ALLOWED_ORIGINS/
+);
+await expectError(
+  "dbAdminGet gagal jaringan -> pesan yang menyebut ALLOWED_ORIGINS",
+  () => {
+    const { sandbox } = makeSandbox({ "*": new TypeError("Failed to fetch") });
+    return sandbox.dbAdminGet("kelulusan/list", "adm");
+  },
+  /ALLOWED_ORIGINS/
+);
+
+console.log("\n=== challenge dicoba ulang sekali ===");
+{
+  let n = 0;
+  const { sandbox } = makeSandbox({
+    "/api/challenge": () => {
+      n++;
+      if (n === 1) throw new TypeError("Failed to fetch");
+      return { status: 200, body: { token: "t" } };
+    },
+    "/api/kelulusan": { status: 200, body: { found: false, nama: "BUDI" } },
+  });
+  const r = await sandbox.dbRequest("kelulusan?nama=BUDI");
+  check("berhasil setelah satu percobaan ulang", r.found === false, JSON.stringify(r));
+  check("challenge dipanggil 2 kali", n === 2, String(n));
+}
 
 console.log(`\n=== RINGKASAN: ${pass} lulus, ${fail} gagal ===\n`);
 process.exit(fail === 0 ? 0 : 1);

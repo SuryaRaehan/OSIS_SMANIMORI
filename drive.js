@@ -19,7 +19,12 @@
 
   function renderItems(items) {
     list.innerHTML = "";
-    items.forEach(function (item, i) {
+    // Entri tanpa url tidak bisa dibuka, jadi jangan dibuat tautan
+    // yang terlihat bisa diklik lalu gagal dibuka.
+    var openable = items.filter(function (item) {
+      return item && item.url;
+    });
+    openable.forEach(function (item, i) {
       var link = document.createElement("a");
       link.className = "folder-file";
       link.href = item.url;
@@ -55,6 +60,16 @@
       link.appendChild(open);
       list.appendChild(link);
     });
+
+    var hidden = items.length - openable.length;
+    if (hidden > 0) {
+      var note = document.createElement("p");
+      note.className = "folder-sub";
+      note.style.marginTop = "18px";
+      note.textContent =
+        hidden + " kegiatan lain belum diunggah dan belum ditampilkan.";
+      list.appendChild(note);
+    }
   }
 
   list.innerHTML = '<p class="folder-empty">Sedang memuat…</p>';

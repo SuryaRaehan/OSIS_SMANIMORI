@@ -1,0 +1,12 @@
+{
+  "name": "osiss-smanimori",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Situs OSIS SMA Negeri 1 Imogiri. Statis, tanpa dependensi runtime.",
+  "scripts": {
+    "test": "node test-api-error.mjs && node test-pengumuman.mjs && node test-video-popup.mjs && node test-worker-origin.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

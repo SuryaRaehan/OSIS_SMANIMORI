@@ -6,7 +6,16 @@ compatibility_date = "2026-08-01"
 # Daftar asal (Origin) yang diizinkan meminta data, pisah dengan koma.
 # Isi dengan domain situs Anda, mis. "https://suryaraehan.github.io" atau
 # "https://smanimori.com". TANPA garis miring di akhir.
-ALLOWED_ORIGINS = "https://suryaraehan.github.io,http://localhost:3000,http://127.0.0.1:3000"
+#
+# PENTING: domain Vercel WAJIB ada di sini. Kalau tidak, Worker
+# membalas 403 dan header CORS dikosongkan, sehingga browser
+# menampilkan "Failed to fetch" although server-nya sehat.
+#
+# Tanda bintang hanya boleh menggantikan SATU label host. Pola di
+# bawah menyertakan prefix proyek supaya domain Vercel milik orang
+# lain tidak ikut bisa membaca data:
+#   https://osissmanimori-*.vercel.app  -> preview acak milik proyek ini
+ALLOWED_ORIGINS = "https://suryaraehan.github.io,https://osissmanimori.vercel.app,https://osissmanimori-*.vercel.app,http://localhost:3000,http://127.0.0.1:3000"
 
 # ============================================================
 # SECRET (JANGAN ditulis di file ini — sudah tidak bisa!)
