@@ -38,7 +38,7 @@ window.PENGUMUMAN = [
   "Tiara Purwandani",
   "Elvareta Deandra Ayu",
   "Muhammad Dzaka Pratama",
-  "Gisela Alesta Meiayana",
+  "Gisela Alesta Meiyana",
   "Atika Nayli Itqiana",
   "Talitha Fitri Artanti",
   "Elvina Hanan Alifka",
@@ -48,6 +48,6 @@ window.PENGUMUMAN = [
   "Dhani Irfan Maulana",
   "Dinda Aprilia",
   "Erza Rizqullah Ahnaf",
-  "A'an Asbi Putra",
-  "Muhammad Nur Ilham"
+  "Aan Asbi Putra",
+  "Nur Muhammad Ilham",
 ];
