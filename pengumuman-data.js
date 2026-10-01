@@ -42,12 +42,12 @@ window.PENGUMUMAN = [
   "Atika Nayli Itqiana",
   "Talitha Fitri Artanti",
   "Elvina Hanan Alifka",
-  "Surya Raehaan Aryudi",
+  "Surya Raehan Aryudi",
   "Dellia Yuanita",
   "Safira Dwi Rahmawati",
   "Dhani Irfan Maulana",
   "Dinda Aprilia",
   "Erza Rizqullah Ahnaf",
-  "Aan Asbi Putra",
+  "A'an Asbi Putra",
   "Muhammad Nur Ilham"
 ];

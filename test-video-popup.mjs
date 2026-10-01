@@ -1,11 +1,15 @@
 // Harness: memastikan script.js menyembunyikan tombol Explore dengan
-// benar saat data-video-src kosong, dan popup tetap bekerja saat diisi.
-import { readFileSync } from "node:fs";
+// benar saat data-video-src kosong, popup tetap bekerja saat diisi, dan
+// berkas video yang ditunjuk benar-benar ada serta muat di GitHub.
+import { readFileSync, statSync, existsSync } from "node:fs";
 import vm from "node:vm";
 
 const html = readFileSync("index.html", "utf8");
 const script = readFileSync("script.js", "utf8");
 const css = readFileSync("style.css", "utf8");
+
+// Batas keras GitHub: file lebih besar dari ini ditolak saat push.
+const GITHUB_MAX = 100 * 1024 * 1024;
 
 let pass = 0, fail = 0;
 function check(name, cond, extra = "") {
@@ -78,7 +82,7 @@ console.log("\n== data-video-src kosong ==");
 
 console.log("\n== data-video-src terisi (video tersedia) ==");
 {
-  const { arrowPill, popupVideo, videoPopup } = run("https://www.youtube.com/watch?v=abc");
+  const { arrowPill, popupVideo, videoPopup } = run("asset/video/profil-720p.mp4");
   check("tombol Explore tetap terlihat", arrowPill.hidden === false);
   check("error handler terpasang (popup menutup sendiri saat video gagal)", (popupVideo.listeners.error || []).length > 0);
 }
@@ -89,9 +93,26 @@ check("ada aturan .subline .arrow-pill[hidden] { display: none }",
 check("display:inline-flex ada di .arrow-pill (besar pasti menimpa hidden)", /\.subline \.arrow-pill\s*\{[^}]*display:\s*inline-flex/s.test(css));
 
 console.log("\n== index.html ==");
-check("data-video-src dikosongkan", html.includes('data-video-src=""'));
-check("tidak ada referensi .mp4 lokal lagi", !/data-video-src="[^"]*\.mp4"/.test(html));
-check("ada catatan cara menghidupkan lagi", html.includes("YouTube"));
+const srcMatch = html.match(/data-video-src="([^"]*)"/);
+const src = srcMatch ? srcMatch[1] : "";
+check("data-video-src terisi", src.length > 0, "kosong");
+check("menunjuk berkas lokal, bukan URL luar", /^asset\/video\/[\w.-]+$/.test(src), src);
+// Master punya nama "PROFIL SMA N 1 WUKIRSARI.mp4" dengan spasi dan
+// tidak ditandai '-720p'. Nama kompresnya profil-720p.mp4.
+check("bukan master 444 MB (nama master mengandung spasi)",
+  !/^asset\/video\/PROFIL SMA N 1 WUKIRSARI\.mp4$/i.test(src), src);
+check("nama file menandai versi kompres", /720p/i.test(src), src);
+check("ada catatan kenapa video dikompres", /100\s*MB/.test(html) && /kompres/i.test(html));
+
+console.log("\n== berkas video yang ditunjuk ==");
+check(`berkas ${src} ada di disk`, existsSync(src), "tidak ditemukan");
+if (existsSync(src)) {
+  const bytes = statSync(src).size;
+  const mib = bytes / 1024 / 1024;
+  check(`ukuran ${mib.toFixed(1)} MiB di bawah batas GitHub 100 MiB`, bytes < GITHUB_MAX,
+    `${(bytes / 1024 / 1024).toFixed(1)} MiB akan ditolak saat push`);
+  check("ukuran tidak nol", bytes > 0);
+}
 
 console.log(`\n=== ${pass} lulus, ${fail} gagal ===\n`);
 process.exit(fail === 0 ? 0 : 1);

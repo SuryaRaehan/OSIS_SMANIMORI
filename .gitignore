@@ -17,13 +17,15 @@ worker/wrangler-state/
 db/*.xlsx
 db/*.xls
 
-# Video profil: 444 MB, jauh di atas batas 100 MB GitHub, jadi tidak
-# bisa ikut ter-commit sama sekali. Berkasnya juga sudah dibuang dari
-# riwayat Git. Kalau nanti mau video tampil lagi, jangan taruh di
-# repo: unggah ke YouTube atau hosting video, lalu arahkan
-# data-video-src di index.html ke sana.
+# Video profil bermASTER: 444 MB, melewati batas 100 MB GitHub, jadi
+# tidak boleh ikut ter-commit. Yang dipakai situs adalah versi 720p
+# hasil kompres (profil-720p.mp4, 81 MB), itu yang dikecualikan
+# di bawah. Kalau nanti/master diganti, simpan master di luar repo.
 asset/video/*.mp4
 asset/video/*.mov
+asset/video/*.mkv
+asset/video/*.avi
+!asset/video/profil-720p.mp4
 
 # OS
 Thumbs.db

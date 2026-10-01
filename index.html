@@ -640,16 +640,19 @@
         </svg>
       </button>
       <!--
-        Video profil: berkasnya 444 MB, melebihi batas 100 MB GitHub,
-        jadi tidak bisa ditaruh di repo ini dan sengaja dibuang. Tombol
-        Explore disembunyikan otomatis selama data-video-src kosong.
-        Untuk menghidupkannya lagi: unggah videonya ke YouTube atau
-        hosting video, lalu isi atribut di bawah dengan URL-nya.
-        Contoh: data-video-src="https://www.youtube.com/watch?v=xxxx"
+        Video profil: master aslinya 444 MB, melewati batas 100 MB per
+        file di GitHub, jadi tidak bisa ditaruh di repo. Yang dipakai di
+        sini hasil kompres 720p (81 MB, 1280x720, 30 fps, 17:35),
+        tetap durasi penuh. Tombol Explore otomatis disembunyikan kalau
+        atribut ini dikosongkan, jadi kalau video gagal dimuat,
+        pengunjung tidak menemukan tombol yang tidak berfungsi.
+
+        Kalau nanti ada versi yang lebih kecil, cukup ganti atribut
+        data-video-src di bawah. Jangan arahkan ke master 444 MB.
       -->
       <video
         class="video-popup-video"
-        data-video-src=""
+        data-video-src="asset/video/profil-720p.mp4"
         controls
         playsinline
         preload="metadata"
