@@ -48,6 +48,6 @@ window.PENGUMUMAN = [
   "Dhani Irfan Maulana",
   "Dinda Aprilia",
   "Erza Rizqullah Ahnaf",
-  "Aan Asbi Putra",
+  "Aan Asbi Putra Prayoga",
   "Nur Muhammad Ilham",
 ];
