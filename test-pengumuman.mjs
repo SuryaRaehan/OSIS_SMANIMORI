@@ -166,8 +166,10 @@ for (const ketik of ["andreas davioso", "ANDREAS DAVIOSO", "aNdReAs DaViOsO"]) {
   check(`tampil "Andreas Davioso" untuk input "${ketik}"`, results.hasilName.textContent === "Andreas Davioso", results.hasilName.textContent);
 }
 
-// Contoh di kotak input harus benar-benar ada di daftar, kalau tidak
-// pengunjung yang menyalinnya akan mengira pencocokan nama rusak.
+// Contoh di kotak input SENGAJA bukan nama yang ada di daftar. Kalau
+// contohnya nama asli, pengunjung bisa menyalinnya, mendapat "LOLOS",
+// lalu ikut membuka link grup WA -- sehingga pengumuman bocor sebelum
+// diumumkan. Contoh yang gagal lolos justru menutup jalur itu.
 console.log("\n== contoh di placeholder ==");
 const mPlaceholder = html.match(/id="namaInput"[\s\S]{0,300}?placeholder="contoh:\s*([^"]+)"/);
 if (!mPlaceholder) {
@@ -175,9 +177,10 @@ if (!mPlaceholder) {
 } else {
   const contoh = mPlaceholder[1];
   const adaDiDaftar = PENGUMUMAN.some((n) => String(n).trim().toLowerCase() === contoh.trim().toLowerCase());
-  check(`placeholder "${contoh}" ada di daftar`, adaDiDaftar);
+  check(`placeholder "${contoh}" TIDAK ada di daftar (anti spoiler grup WA)`, !adaDiDaftar);
   clickWith(contoh);
-  check("menyalin placeholder memberi LOLOS", results.hasilTag.textContent === "LOLOS", results.hasilTag.textContent);
+  check("menyalin placeholder tidak lolos", results.hasilTag.textContent === "TIDAK LOLOS", results.hasilTag.textContent);
+  check("menyalin placeholder tidak membuka link WA", !results.hasilWa.hasAttribute("href"));
 }
 
 console.log("\n== nama DI LUAR daftar -> TIDAK LOLOS, TANPA link WA ==");
@@ -279,11 +282,12 @@ console.log("\n== versi cache data tidak usang ==");
   ]) {
     check(`tidak ada lagi "${salah}"`, !dataSrc.includes(`"${salah}"`));
   }
-  // Placeholder harus memakai nama yang benar-benar ada di daftar.
+  // Placeholder harus nama karangan, bukan anggota yang lolos, supaya
+  // menyalinnya tidak pernah menghasilkan tautan grup WA.
   const ph = (html.match(/placeholder="contoh: ([^"]+)"/) || [])[1] || "";
   check(
-    `placeholder memakai nama valid (${ph})`,
-    dataSrc.toUpperCase().includes(`"${ph.toUpperCase()}"`)
+    `placeholder bukan nama anggota (${ph})`,
+    !dataSrc.toUpperCase().includes(`"${ph.toUpperCase()}"`)
   );
 }
 
